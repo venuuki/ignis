@@ -1,7 +1,7 @@
 """Reference-scale harmonization with disjoint training, calibration and final test years.
 
-The continuous record uses measured VIIRS reference values where available and
-calibrated MODIS estimates otherwise. Overlapping sensors are never summed.
+The continuous record preserves calibrated MODIS during overlap and uses the
+VIIRS reference after the final supplied MODIS month. Overlapping sensors are never summed.
 Cloud-free observation exposure cannot be inferred from a hotspot-only archive.
 """
 from __future__ import annotations
@@ -14,8 +14,9 @@ import numpy as np
 import polars as pl
 from pipeline import harmonize as h
 from pipeline.common import PROCESSED, load_config
+from pipeline.source_support import source_support, apply_continuity, SOURCE_POLICY, REFERENCE_POLICY
 
-VERSION = 'harm-v3.1-calibrated-only'
+VERSION = 'harm-v3.2-source-continuity'
 
 def split_years(config):
     c=config['harmonization']; first,last=c['overlap_years']
@@ -131,10 +132,13 @@ def main():
             keep=(pl.col('modis_harmonized')>=h.MIN_STORED_VALUE)|(pl.col('modis')>0)|(pl.col('viirs_ref').fill_null(0)>0)
             stored.append(r.filter(pl.col('modis_harmonized').is_not_null()&keep).select('country','cell','region_cell','year','month','terra','aqua','modis','snpp','n20','n21','viirs_ref','modis_harmonized','modis_model_var','modis_frp','snpp_frp'))
             print(f'  {country} {years[i]}–{years[min(i+1,len(years)-1)]}',flush=True)
-    monthly=pl.concat(stored);atomic_parquet(monthly,PROCESSED/'monthly_cells.parquet');atomic_parquet(t.cells,PROCESSED/'cells.parquet')
+    monthly=pl.concat(stored);atomic_parquet(t.cells,PROCESSED/'cells.parquet')
     meta=(pl.DataFrame({'country':list(t.country_codes)}).join(t.months,how='cross').join(t.availability,on=['year','month'],how='left').select('country','year','month','coverage',
         method=pl.when(pl.col('coverage')<=0).then(pl.lit('no_data')).when(pl.col('snpp_av')).then(pl.lit('viirs_observed')).when(pl.col('n20_av')|pl.col('n21_av')).then(pl.lit('viirs_scaled')).when(pl.col('aqua_av')).then(pl.lit('modis_model')).otherwise(pl.lit('modis_model_terra_only')),
         viirs_src=pl.when(pl.col('snpp_av')).then(pl.lit('S-NPP')).when(pl.col('n20_av')).then(pl.lit('NOAA-20 (scaled)')).when(pl.col('n21_av')).then(pl.lit('NOAA-21 (scaled)')).otherwise(None)))
+    meta=source_support(meta,PROCESSED/'hotspots')
+    monthly=apply_continuity(monthly,meta)
+    atomic_parquet(monthly,PROCESSED/'monthly_cells.parquet')
     atomic_parquet(meta,PROCESSED/'monthly_meta.parquet')
     report=dict(method_version=VERSION,unit='VIIRS S-NPP-equivalent hotspots',countries=list(t.country_codes),grid=cfg['grid'],cleaning=cfg['cleaning'],
         overlap_years=cfg['harmonization']['overlap_years'],training_years=train_years,calibration_years=cal_years,holdout_years=test_years,
@@ -143,8 +147,8 @@ def main():
         gbm_feature_importance=feature_importance,features=h.FEATURES_FULL,terra_features=h.FEATURES_TERRA_ONLY,
         noaa20_to_snpp_ratio=t.ratios,step_change_tests=h.sensor_switch_test(pl.concat(totals)),rows_stored=monthly.height,data_last_date=str(last_date),
         evaluation_protocol='Training-only climatology and platform scaling; calibration years choose the model and fit residual intervals; disjoint final test years assess performance. Production model refitted after frozen test predictions.',
-        output_series='modis_harmonized',
-        reference_policy='S-NPP and scaled NOAA observations supply the training and comparison reference only. The historical activity series is calibrated MODIS for every available month; there is no sensor-switching output.',
+        output_series='modis_harmonized',source_policy=SOURCE_POLICY,
+        reference_policy=REFERENCE_POLICY,
         uncertainty_scope='Residual calibration uncertainty for MODIS estimates only; satellite measurement/omission uncertainty is unknown. No zero-width confidence interval is assigned to measured or scaled reference values.',
         coverage_scope='Temporal span of supplied partitions, not cloud-free viewing exposure. A zero is no recorded quality-filtered detections, not evidence of no fire.',
         limitations=['Sensor-reference agreement is not independent ground truth.','Observation opportunities, clouds and missed fires are not recovered from hotspot-only files.','Retrospective transfer to 2000–2011 and orbit drift remain sources of uncertainty.'],

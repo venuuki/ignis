@@ -23,10 +23,26 @@ class DataStore:
         self.cells = pl.read_parquet(self.dir / "cells.parquet")
         native=self.dir / "native_snpp_monthly.parquet"
         self.native_snpp=pl.read_parquet(native) if native.exists() else None
+        # Bound source support by supplied native records, never by launch dates alone.
+        # This is temporal archive support, not clear-sky or orbit coverage.
+        from .continuity import source_support
+        self.meta = source_support(self.meta, self.dir / "hotspots")
         self.hotspots_path = str(self.dir / "hotspots" / "*.parquet").replace("\\", "/")
         fc = self.dir / "forecasts.parquet"
         self.forecasts = pl.read_parquet(fc) if fc.exists() else None
         self.harm_report = self._json("harmonization_report.json")
+        from pipeline.source_support import SOURCE_POLICY, REFERENCE_POLICY
+        if self.harm_report.get("reference_policy") != REFERENCE_POLICY:
+            self.harm_report["calibration_archive_reference_policy"] = self.harm_report.get("reference_policy")
+        self.harm_report.update(source_policy=SOURCE_POLICY, reference_policy=REFERENCE_POLICY)
+        self.continuity = {
+            "source_policy": SOURCE_POLICY,
+            "support_known": "modis_support_end" in self.meta.columns,
+            "modis_archive_end": (self.meta.select("country", "modis_support_end").unique().to_dicts()
+                if "modis_support_end" in self.meta.columns else []),
+            "boundary_resolution": "month",
+            "coverage_scope": "Supplied archive bounds; viewing opportunities and clouds are unknown.",
+        }
         self.fc_report = self._json("forecast_report.json")
         mp = settings.manifest_path
         self.manifest = json.loads(mp.read_text()) if mp.exists() else {}

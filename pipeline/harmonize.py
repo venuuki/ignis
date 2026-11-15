@@ -127,7 +127,7 @@ def sensor_availability(counts: pl.DataFrame) -> pl.DataFrame:
         "year", "month",
         terra_av=yyyymm >= 200011,                      # Terra MODIS from Nov 2000
         aqua_av=yyyymm >= 200207,                       # Aqua MODIS from Jul 2002
-        snpp_av=(yyyymm >= 201201) & snpp_ok,           # S-NPP VIIRS from Jan 2012
+        snpp_av=(yyyymm >= 201201) & (pl.col("snpp") > 0) & snpp_ok,           # S-NPP VIIRS from Jan 2012
         n20_av=(yyyymm >= 201801) & (pl.col("n20") > 0),
         n21_av=(yyyymm >= 202301) & (pl.col("n21") > 0),
     )

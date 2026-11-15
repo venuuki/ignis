@@ -1,0 +1,313 @@
+{
+  "completed_at": "2026-11-15T16:22:34.449996+00:00",
+  "protocol": {
+    "train_years": [
+      2013,
+      2016,
+      2018,
+      2023
+    ],
+    "selection_years": [
+      2017
+    ],
+    "interval_years": [
+      2022
+    ],
+    "test_years": [
+      2024,
+      2025
+    ],
+    "candidates": [
+      [
+        "global",
+        500.0
+      ],
+      [
+        "season",
+        500.0
+      ],
+      [
+        "season",
+        5000.0
+      ],
+      [
+        "tile",
+        500.0
+      ],
+      [
+        "tile",
+        5000.0
+      ],
+      [
+        "tile_quarter",
+        500.0
+      ],
+      [
+        "tile_quarter",
+        5000.0
+      ],
+      [
+        "tile_month",
+        500.0
+      ],
+      [
+        "tile_month",
+        5000.0
+      ]
+    ],
+    "selection": "Mean of national WAPE, pooled 0.5-degree WAPE, and mean of three fixed geographic-sample WAPEs; candidate national WAPE must not exceed baseline by 2 percentage points.",
+    "reference": "Native S-NPP only, months passing the existing pooled 30% availability check; no learned platform scaling or production predictions used.",
+    "audit": "All complete overlap years were previously used in production refitting. 2024-2025 are retrospective holdouts for this experiment, not globally untouched project data. 2019-2021 were already inspected and are not used for selection or final scoring.",
+    "deployment": "Offline candidate only. Never modifies production model, calendar, forecasts or UI.",
+    "region_boxes": [
+      {
+        "id": "australia",
+        "name": "Australia",
+        "bbox": null
+      },
+      {
+        "id": "north",
+        "name": "Northern Australia sample",
+        "bbox": [
+          129.0,
+          -17.0,
+          137.0,
+          -12.0
+        ]
+      },
+      {
+        "id": "southeast",
+        "name": "Southeastern Australia sample",
+        "bbox": [
+          146.0,
+          -38.0,
+          151.0,
+          -32.0
+        ]
+      },
+      {
+        "id": "southwest",
+        "name": "Southwestern Australia sample",
+        "bbox": [
+          115.0,
+          -35.0,
+          120.0,
+          -30.0
+        ]
+      }
+    ],
+    "script_sha256": "df1a72b76cf928f0bbb597b3bad5d55813a29f91231816593466a45b35646008"
+  },
+  "selected": "tile_quarter_500",
+  "frozen_selection_sha256": "dc6d72f3e1eceabe4f7560121f7bf91ac6521f09d857fc8bcb28f7e820f2079d",
+  "intervals": {
+    "phi": 11.708947949801653,
+    "alpha": 0.11946395258052743,
+    "variance_floor_count": 1.0,
+    "area_bands": {
+      "australia": {
+        "q80": 10.849383364543048,
+        "n_calibration_months": 12
+      },
+      "north": {
+        "q80": 5.443360024939904,
+        "n_calibration_months": 12
+      },
+      "southeast": {
+        "q80": 3.342459656462988,
+        "n_calibration_months": 12
+      },
+      "southwest": {
+        "q80": 5.646592408810465,
+        "n_calibration_months": 12
+      }
+    },
+    "scope": "Residual reference agreement only. Monthly serial dependence prevents an exchangeability guarantee; fixed evaluation areas only, not arbitrary-AOI calibrated intervals."
+  },
+  "evaluated_months": [
+    {
+      "year": 2024,
+      "month": 1
+    },
+    {
+      "year": 2024,
+      "month": 2
+    },
+    {
+      "year": 2024,
+      "month": 3
+    },
+    {
+      "year": 2024,
+      "month": 4
+    },
+    {
+      "year": 2024,
+      "month": 5
+    },
+    {
+      "year": 2024,
+      "month": 6
+    },
+    {
+      "year": 2024,
+      "month": 7
+    },
+    {
+      "year": 2024,
+      "month": 8
+    },
+    {
+      "year": 2024,
+      "month": 9
+    },
+    {
+      "year": 2024,
+      "month": 10
+    },
+    {
+      "year": 2024,
+      "month": 11
+    },
+    {
+      "year": 2024,
+      "month": 12
+    },
+    {
+      "year": 2025,
+      "month": 1
+    },
+    {
+      "year": 2025,
+      "month": 2
+    },
+    {
+      "year": 2025,
+      "month": 3
+    },
+    {
+      "year": 2025,
+      "month": 4
+    },
+    {
+      "year": 2025,
+      "month": 5
+    },
+    {
+      "year": 2025,
+      "month": 6
+    },
+    {
+      "year": 2025,
+      "month": 7
+    },
+    {
+      "year": 2025,
+      "month": 8
+    },
+    {
+      "year": 2025,
+      "month": 9
+    },
+    {
+      "year": 2025,
+      "month": 10
+    },
+    {
+      "year": 2025,
+      "month": 11
+    },
+    {
+      "year": 2025,
+      "month": 12
+    }
+  ],
+  "regions": [
+    {
+      "id": "australia",
+      "name": "Australia",
+      "n_months": 24,
+      "baseline": {
+        "monthly_mae": 16284.84544604602,
+        "wape_pct": 19.45609099831664,
+        "bias_pct": 6.7778375490338085
+      },
+      "candidate": {
+        "monthly_mae": 10047.100314380785,
+        "wape_pct": 12.00363237302141,
+        "bias_pct": 6.07161315842643
+      },
+      "baseline_existing_interval_coverage_pct": 45.83333333333333,
+      "candidate_interval_coverage_pct": 91.66666666666666,
+      "baseline_mean_interval_width": 26964.278076427872,
+      "candidate_mean_interval_width": 36064.90869631052,
+      "baseline_handoff_excess_pct": 20.270099769565313,
+      "candidate_handoff_excess_pct": 12.492133693718149
+    },
+    {
+      "id": "north",
+      "name": "Northern Australia sample",
+      "n_months": 24,
+      "baseline": {
+        "monthly_mae": 3225.7152874220587,
+        "wape_pct": 16.934888831606102,
+        "bias_pct": -8.052233455369873
+      },
+      "candidate": {
+        "monthly_mae": 1900.511124292172,
+        "wape_pct": 9.977614806432706,
+        "bias_pct": -3.4412473555684517
+      },
+      "baseline_existing_interval_coverage_pct": 83.33333333333334,
+      "candidate_interval_coverage_pct": 83.33333333333334,
+      "baseline_mean_interval_width": 10043.32609295186,
+      "candidate_mean_interval_width": 6697.413589347583,
+      "baseline_handoff_excess_pct": 17.637309257120023,
+      "candidate_handoff_excess_pct": 10.336884300188679
+    },
+    {
+      "id": "southeast",
+      "name": "Southeastern Australia sample",
+      "n_months": 24,
+      "baseline": {
+        "monthly_mae": 293.8301425978272,
+        "wape_pct": 15.382770373553575,
+        "bias_pct": -9.027081248239115
+      },
+      "candidate": {
+        "monthly_mae": 301.2900449860063,
+        "wape_pct": 15.773315619973548,
+        "bias_pct": -10.223503386970329
+      },
+      "baseline_existing_interval_coverage_pct": 87.5,
+      "candidate_interval_coverage_pct": 95.83333333333334,
+      "baseline_mean_interval_width": 2172.2890525474995,
+      "candidate_mean_interval_width": 1646.2384133704693,
+      "baseline_handoff_excess_pct": 15.369683688925901,
+      "candidate_handoff_excess_pct": 15.875884525497803
+    },
+    {
+      "id": "southwest",
+      "name": "Southwestern Australia sample",
+      "n_months": 24,
+      "baseline": {
+        "monthly_mae": 450.25358014512466,
+        "wape_pct": 21.829594609275315,
+        "bias_pct": -9.691265389487825
+      },
+      "candidate": {
+        "monthly_mae": 497.24148502402704,
+        "wape_pct": 24.10770401312507,
+        "bias_pct": 1.9972876322281448
+      },
+      "baseline_existing_interval_coverage_pct": 83.33333333333334,
+      "candidate_interval_coverage_pct": 91.66666666666666,
+      "baseline_mean_interval_width": 3200.80324446855,
+      "candidate_mean_interval_width": 3033.3904662588698,
+      "baseline_handoff_excess_pct": 22.092609476975756,
+      "candidate_handoff_excess_pct": 23.738173446081454
+    }
+  ],
+  "production_changed": false,
+  "interpretation": "Fresh out-of-fit evaluation for this experiment, not an untouched-project test. Reference-sensor agreement only. Interval diagnostics apply only to the four fixed geographic samples."
+}

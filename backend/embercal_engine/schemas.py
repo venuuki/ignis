@@ -54,6 +54,12 @@ class Query(BaseModel):
                 date.fromisoformat(value + "-01")
         if self.end and self.start > self.end:
             raise ValueError("Start month must precede end month")
+        current_year = date.today().year
+        for year in (self.baseline_start, self.baseline_end):
+            if year is not None and not 2000 <= year <= current_year:
+                raise ValueError(f"Baseline year must be between 2000 and {current_year}")
+        if self.baseline_start is not None and self.baseline_end is not None and self.baseline_start > self.baseline_end:
+            raise ValueError("Baseline from must not exceed baseline to")
         return self
 
 

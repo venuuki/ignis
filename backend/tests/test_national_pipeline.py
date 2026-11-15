@@ -38,3 +38,13 @@ def test_pettitt_detects_step():
     assert 50 <= t <= 70 and p < 0.01
     _, _, p2 = pettitt(rng.normal(0, 1, 120))
     assert p2 > 0.05
+
+
+def test_unknown_viirs_confidence_is_not_promoted_to_nominal():
+    values=['n','nominal','h','high','l','low','nonsense','missing','']
+    raw=pl.DataFrame(dict(latitude=['-35']*9,longitude=['148']*9,acq_date=['2024-01-01']*9,
+        acq_time=['1200']*9,satellite=['N']*9,instrument=['VIIRS']*9,
+        confidence=values,frp=['1']*9,daynight=['D']*9,type=['0']*9))
+    out=normalise_firms(raw,'Australia','synthetic-test',load_config())
+    assert out['qc_pass'].to_list()==[True,True,True,True,False,False,False,False,False]
+    assert out['conf_class'].to_list()[-3:]==['unknown']*3

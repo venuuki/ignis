@@ -63,6 +63,8 @@ def test_national_analysis_calendar_trends_and_csv(analysis_store):
     csv = client.post('/api/analysis/export/calendar.csv', json=q)
     assert csv.status_code == 200
     assert len(csv.text.strip().splitlines()) == 121
+    header=csv.text.splitlines()[0]
+    assert all(field in header for field in ['uncertainty_status','nominal_interval_coverage','interval_validated_for_selection','baseline_status','source_policy'])
 
 def test_small_australian_selection_uses_regional_skill(analysis_store):
     q = dict(aoi=dict(type='bbox', bbox=[148, -35, 148.1, -34.9]), baseline_start=2015, baseline_end=2024)
@@ -135,4 +137,11 @@ def test_forecast_rejects_outputs_trained_on_another_series(analysis_store):
     response = client.post('/api/analysis/forecast', json={'aoi':{'type':'region','region':'Australia'}})
     assert response.status_code == 200
     assert response.json()['available'] is False
-    assert 'calibrated MODIS' in response.json()['reason']
+    assert 'harmonized history' in response.json()['reason']
+
+
+def test_unskillful_forecast_never_falls_back_to_model_with_short_baseline(analysis_store):
+    response = client.post('/api/analysis/forecast', json={'aoi':{'type':'region','region':'Australia'},'baseline_start':2024,'baseline_end':2024})
+    assert response.status_code == 200
+    assert response.json()['available'] is False
+    assert 'fewer than five' in response.json()['reason']

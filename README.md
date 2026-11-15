@@ -12,7 +12,7 @@ powershell -ExecutionPolicy Bypass -File .\Start.ps1
 
 Open http://127.0.0.1:8010. Australia analysis is the main workspace. Select the national record, an Australian preset, coordinates, a point/radius, or a drawn polygon/circle, and select **Analyse this area**.
 
-The default harmonized series is calibrated MODIS throughout the historical record. Three separate observation/reference measures remain for comparison: native MODIS, the gap-filled VIIRS reference, and native S-NPP. No sensor-switching historical series is generated. Forecasts are trained on calibrated MODIS history.
+The three selectable series are Harmonized, MODIS and VIIRS reference. Harmonized preserves calibrated MODIS through the final supplied MODIS month, then continues with the VIIRS reference on the same S-NPP-equivalent count scale. The native S-NPP cache remains an internal diagnostic. Sensors are never summed or averaged. Live observations do not automatically update or retrain the saved calendar.
 
 ## What changed in v3
 
@@ -24,7 +24,7 @@ The calibration years selected a global day/night-ratio transfer for the main re
 
 - **Calendar / Anomalies:** source-aware monthly history, effective baseline sample sizes, and month details. Incomplete months have observed counts but no extrapolated full-month anomaly.
 - **Daily observations:** choose a day, inspect that month's native counts by satellite, and show actual selected-day observations on the map. The monthly model is not applied as an invented daily calibration.
-- **Harmonization:** compare native MODIS, calibrated MODIS and the VIIRS reference; separately inspect frozen final-test predictions and errors for the actual selected area.
+- **Harmonization:** compare native MODIS, calibrated MODIS and the VIIRS reference; frozen final-test predictions and detailed validation remain available in offline reports and the retained backend evidence calculation.
 - **Seasons / trends:** baseline seasonality, complete-year totals, rankings and Mann?Kendall/Sen summaries.
 - **Forecast / Climate:** rebuilt experimental outlooks, actual measured skill, historical-baseline fallback for subnational areas without positive regional skill, and dated climate context.
 - **Offline methods document:** calibration protocol, candidate test results, uncertainty performance and limitations are in `docs/EmberCal_Calibration_and_Data_Methods.docx`.
@@ -74,3 +74,19 @@ Counts are native satellite detections and may include repeated observations of 
 The Australia workspace automatically shows a visual seasonal profile and latest-complete-month comparison beneath the map. The summary follows the selected area, series and baseline without requiring the historical analysis button. It uses the existing calendar API and its stored historical record; the independent live hotspot feed is not used to score a partial month.
 
 The twelve-month profile highlights the usual active window in teal and the peak in amber. Select any month to inspect its typical baseline count. The anomaly gauge uses the existing same-month baseline percentile and shows actual versus typical median counts, with a ratio only when the median is positive. Fewer than five baseline years produces a limited-history state; missing data and incomplete months do not receive a confident anomaly classification. Save summary exports the cards as a PNG. Keyboard selection and reduced-motion preferences are supported.
+
+## Current verified project status
+
+The production national day/night calibration remains installed. A geographic/seasonal candidate was not promoted after it worsened southern samples. Training-only cross-validation favors a simpler monthly day/night candidate for further evaluation; this is not new final-test evidence and is not automatically deployed.
+
+The calendar labels residual ranges as approximate, suppresses zero-width ranges, and withholds anomaly labels with fewer than five baseline values. Unskillful outlooks with insufficient baseline history are withheld. Future historical CSV normalization rejects unknown VIIRS confidence instead of treating it as nominal; existing imported data were not rewritten.
+
+Current checks: 82 backend tests, 9 frontend tests, and TypeScript/Vite build passed. Long methods remain offline. No new external data, dependency, credential or continuous history updater was added.
+
+- [Full updated Word methods](docs/EmberCal_Calibration_and_Data_Methods.docx)
+- [Source continuity](docs/Sensor_Continuity.md)
+- [Frozen regional validation](docs/regional-validation/README.md)
+- [Retrospective experiment and decision](docs/calibration-experiment/ASSESSMENT.md)
+- [Training-only cross-validation and geographic safeguards](docs/calibration-cross-validation/README.md)
+
+The Word report includes a ready-to-run three-task user evaluation protocol. Actual user sessions, independent fire validation, cloud-exposure accounting and prospective evaluation remain pending; they must not be represented as completed.
