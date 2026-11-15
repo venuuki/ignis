@@ -8,20 +8,11 @@ from ignis.studio_api import app
 
 client = TestClient(app)
 
-def test_readiness_and_saved_study_are_independent():
+def test_readiness_is_independent_of_retired_pages():
     r = client.get('/api/analysis/readiness')
     assert r.status_code == 200
     assert r.json()['region'] == 'Australia'
     assert 'FIRMS_MAP_KEY' not in r.text
-    assert client.get('/api/calendar').status_code == 200
-
-def test_recent_queries_reject_other_countries_before_network(monkeypatch):
-    import ignis.studio_regions as region
-    def forbidden(*args, **kwargs):
-        raise AssertionError('Must not call NASA for an unsupported selection')
-    monkeypatch.setattr(region, 'fetch_range', forbidden)
-    r = client.get('/api/region/observations', params=dict(west=80, south=7, east=81, north=8, start='2026-11-01', end='2026-11-01'))
-    assert r.status_code == 422
 
 @pytest.fixture
 def analysis_store(monkeypatch, tmp_path):

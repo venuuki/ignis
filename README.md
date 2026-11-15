@@ -54,3 +54,8 @@ For a new environment run `Setup.ps1` (Python 3.10+, Node 22+). Run `Verify.ps1`
 FIRMS credentials belong only in the backend process environment or `backend/.env`, never in frontend variables. No key is needed to view the imported local data. OSM needs internet for street tiles; Natural Earth is the bundled fallback.
 
 Hotspots are detections, not individual fires or burned area. A hotspot-only archive cannot establish cloud-free viewing coverage or reconstruct all missed fires. The application displays these limits and is an experimental research tool. See `docs/HARMONIZATION_V3.md` and `VERIFICATION.md`.
+
+
+## Focused application navigation
+
+The website now contains Australia analysis and Observations. The original study calendar, day/night experiment and recent area explorer have been removed, including their dedicated routes and study-summary CSV files. Methods and model-validation presentations are documented in `docs/EmberCal_Calibration_and_Data_Methods.docx` instead of displayed in the website. Current calibration, independent-test artifacts, forecasts, climate inputs, AOI tools and exports are retained.
