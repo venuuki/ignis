@@ -31,6 +31,7 @@ export default function Map({
   selectionGeometry,
   records,
   observed = false,
+  feedLabel,
   bounds,
   allowDrawing = true,
 }: {
@@ -41,6 +42,7 @@ export default function Map({
   selectionGeometry?: any;
   records?: any[];
   observed?: boolean;
+  feedLabel?: string;
   bounds?: number[];
   allowDrawing?: boolean;
 }) {
@@ -54,6 +56,8 @@ export default function Map({
     [error, setError] = useState(false),
     [layers, setLayers] = useState(false),
     [sensor, setSensor] = useState("All sensors");
+  const boundsRef = useRef(bounds);
+  boundsRef.current = bounds;
   const recordRef = useRef(records);
   recordRef.current = records;
   const callback = useRef(onArea);
@@ -91,7 +95,16 @@ export default function Map({
       attributionControl: { compact: false },
     }); } catch { setError(true); return; }
     map.current = m;
-    const resize = new ResizeObserver(() => m.resize());
+    let lastWidth = el.current.clientWidth;
+    const resize = new ResizeObserver(() => {
+      m.resize();
+      const width=el.current?.clientWidth||0;
+      const b=boundsRef.current;
+      if(width!==lastWidth && b && b.length===4 && b.every(Number.isFinite)) {
+        m.fitBounds([[b[0],b[1]],[b[2],b[3]]],{padding:30,maxZoom:9,duration:0});
+      }
+      lastWidth=width;
+    });
     resize.observe(el.current);
     m.on("error", (event: any) => {
       if (!active) return;
@@ -123,7 +136,7 @@ export default function Map({
         source: "hotspots",
         paint: {
           "circle-radius": 8,
-          "circle-color": "#e8743b",
+          "circle-color": ["case", ["<=", ["coalesce", ["get", "age_hours"], 0], 24], "#e8743b", "#7e6c9d"],
           "circle-opacity": 0.12,
         },
       });
@@ -133,7 +146,7 @@ export default function Map({
         source: "hotspots",
         paint: {
           "circle-radius": 3.2,
-          "circle-color": "#d76532",
+          "circle-color": ["case", ["<=", ["coalesce", ["get", "age_hours"], 0], 24], "#d76532", "#7e6c9d"],
           "circle-stroke-color": "#fff",
           "circle-stroke-width": 1,
         },
@@ -147,7 +160,7 @@ export default function Map({
           content.append(title);
           for (const line of [
             p.satellite ? `NASA FIRMS · ${p.satellite}` : "NASA FIRMS · selected regional query",
-            p.date ? `${p.date} ${p.time || ""}` : "Raw returned point location",
+            p.date ? `${p.date} ${p.time || ""} UTC` : "Raw returned point location",
             p.frp != null ? `FRP: ${p.frp} MW` : null,
             p.sensor_confidence != null ? `Native sensor confidence: ${p.sensor_confidence}` : null,
           ].filter(Boolean)) {
@@ -253,7 +266,7 @@ export default function Map({
     setTool(t);
   }
   return (
-    <div className="map-wrap">
+    <div className="map-wrap" data-point-count={records?.length || 0}>
       <div ref={el} className="map-canvas" />
       <div className="map-top">
         <span className="map-label">
@@ -340,7 +353,7 @@ export default function Map({
           <Flame size={12} />{" "}
           {observed ? "Observed detections" : "Observed hotspots"}
         </span>
-        <span>{allowDrawing ? "Draw an area to explore →" : "Saved observations · UTC"}</span>
+        <span>{feedLabel || (allowDrawing ? "Draw an area to explore →" : "Saved observations · UTC")}</span>
       </div>
     </div>
   );

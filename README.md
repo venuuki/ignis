@@ -59,3 +59,19 @@ Hotspots are detections, not individual fires or burned area. A hotspot-only arc
 ## Focused application navigation
 
 The website now contains Australia analysis and Observations. The original study calendar, day/night experiment and recent area explorer have been removed, including their dedicated routes and study-summary CSV files. Methods and model-validation presentations are documented in `docs/EmberCal_Calibration_and_Data_Methods.docx` instead of displayed in the website. Current calibration, independent-test artifacts, forecasts, climate inputs, AOI tools and exports are retained.
+
+
+## Recent hotspot map
+
+Australia analysis opens with a NASA FIRMS near-real-time layer for the last 24 hours, including today's available UTC detections. Choose 72 hours or 7 days, change the area, refresh or export all matched records. Sources are checked every five minutes while the page is visible. Server-side per-product caches also expire after five minutes; refreshing does not consume repeated NASA calls within that cache window.
+
+The server uses FIRMS_MAP_KEY from the environment or root/backend .env without exposing it to the browser. Without a configured key it uses NASA's public Australia/New Zealand regional feeds, filtered to Australia. One source outage does not hide successful sources; unavailable products and stale cache fallback are shown explicitly. A complete outage without usable cached responses is an error, not a zero count. The live layer never silently substitutes the historical archive or modifies harmonization outputs.
+
+Counts are native satellite detections and may include repeated observations of one fire; the live layer is not harmonized daily data. The confidence option keeps nominal/high VIIRS and MODIS confidence >=30, excluding known non-vegetation types when provided. NRT type is often unknown. National filtering uses the bundled generalized Natural Earth Australia boundary with a 0.03-degree coastal tolerance. Today is incomplete and NASA publication delays apply. Use Archive search to show the saved dataset instead.
+
+
+## Visual area summary
+
+The Australia workspace automatically shows a visual seasonal profile and latest-complete-month comparison beneath the map. The summary follows the selected area, series and baseline without requiring the historical analysis button. It uses the existing calendar API and its stored historical record; the independent live hotspot feed is not used to score a partial month.
+
+The twelve-month profile highlights the usual active window in teal and the peak in amber. Select any month to inspect its typical baseline count. The anomaly gauge uses the existing same-month baseline percentile and shows actual versus typical median counts, with a ratio only when the median is positive. Fewer than five baseline years produces a limited-history state; missing data and incomplete months do not receive a confident anomaly classification. Save summary exports the cards as a PNG. Keyboard selection and reduced-motion preferences are supported.

@@ -167,6 +167,9 @@ def connection_status():
 from .analysis_bridge import router as analysis_router
 app.include_router(analysis_router)
 
+from embercal_engine.live_hotspots import router as live_router
+app.include_router(live_router)
+
 if (ROOT / "frontend" / "dist").is_dir():
     app.mount(
         "/",
