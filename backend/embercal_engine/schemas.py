@@ -35,7 +35,7 @@ class AOI(BaseModel):
         return self
 
 
-Series = Literal["harmonized", "modis_harmonized", "modis_raw", "viirs_raw", "viirs_snpp_raw"]
+Series = Literal["modis_harmonized", "modis_raw", "viirs_raw"]
 
 
 class Query(BaseModel):
@@ -44,7 +44,7 @@ class Query(BaseModel):
     end: str | None = Field(None, pattern=r"^\d{4}-\d{2}$", description="YYYY-MM (default: latest)")
     baseline_start: int | None = None
     baseline_end: int | None = None
-    series: Series = "harmonized"
+    series: Series = "modis_harmonized"
 
     @model_validator(mode="after")
     def valid_dates(self):

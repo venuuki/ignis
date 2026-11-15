@@ -60,8 +60,6 @@ def aoi_monthly(store: DataStore, weights: pl.DataFrame, eff_cells: float) -> pl
     snpp = (pl.col("snpp") * pl.col("w")).sum() if "snpp" in j.columns else pl.lit(None, pl.Float64)
     agg = j.group_by("year", "month").agg(
         model_var=model_variance, viirs_snpp_raw=snpp,
-        harmonized=(pl.col("harmonized") * pl.col("w")).sum(),
-        var=(pl.col("harm_var") * pl.col("w")**2).sum(),
         modis_raw=(pl.col("modis") * pl.col("w")).sum(),
         viirs_raw=(pl.col("viirs_ref") * pl.col("w")).sum(),
         modis_harmonized=(pl.col("modis_harmonized") * pl.col("w")).sum(),
@@ -86,7 +84,7 @@ def aoi_monthly(store: DataStore, weights: pl.DataFrame, eff_cells: float) -> pl
     viirs_era = pl.col("method").is_in(["viirs_observed", "viirs_scaled"])
     zero = lambda c: pl.when(has_data).then(pl.col(c).fill_null(0)).otherwise(None)  # noqa: E731
     m = m.with_columns(
-        harmonized=zero("harmonized"), var=zero("var"), modis_raw=zero("modis_raw"), modis_harmonized=zero("modis_harmonized"),
+        modis_raw=zero("modis_raw"), modis_harmonized=zero("modis_harmonized"),
         frp_modis=zero("frp_modis"), frp_snpp=zero("frp_snpp"),
         viirs_snpp_raw=pl.when(has_data & pl.col("_snpp_present").fill_null(False)).then(pl.col("viirs_snpp_raw").fill_null(0)).otherwise(None),
         viirs_raw=pl.when(has_data & viirs_era).then(pl.col("viirs_raw").fill_null(0)).otherwise(None),
@@ -95,16 +93,12 @@ def aoi_monthly(store: DataStore, weights: pl.DataFrame, eff_cells: float) -> pl
     terra_kappa=_interp_log(max(eff_cells,1.),[(1,1.),(25,terra_vm.get("kappa_region",1.)),(1000,terra_vm.get("kappa_country",1.))])
     early=(pl.col("year")<2002)|((pl.col("year")==2002)&(pl.col("month")<7))
     m=m.with_columns(_kappa=pl.when(early).then(pl.lit(terra_kappa)).otherwise(pl.lit(kappa)))
-    sd = (m["var"].fill_null(0).clip(0, None) ** .5) * m["_kappa"] * Z80
     model_sd = (m["model_var"].clip(0, None) ** .5) * m["_kappa"] * Z80
-    m=m.with_columns(_sd=sd,_model_sd=model_sd)
-    model_month=pl.col("method").is_in(["modis_model","modis_model_terra_only"])
+    m=m.with_columns(_model_sd=model_sd)
     return m.with_columns(
-        lo=pl.when(model_month).then((pl.col("harmonized")-pl.col("_sd")).clip(0,None)).otherwise(None),
-        hi=pl.when(model_month).then(pl.col("harmonized")+pl.col("_sd")).otherwise(None),
         model_lo=(pl.col("modis_harmonized")-pl.col("_model_sd")).clip(0,None),
         model_hi=pl.col("modis_harmonized")+pl.col("_model_sd"),
-    ).drop("_sd","_model_sd","_kappa")
+    ).drop("_model_sd","_kappa")
 
 
 # =============================================================================== calendar
@@ -132,20 +126,19 @@ def calendar(store: DataStore, monthly: pl.DataFrame, series: str, start: int, e
     for r in sel.iter_rows(named=True):
         c = clim[r["month"]]
         val, proj, cov = r["value"], r["projected"], r["coverage"] or 0
-        modelled = series == "modis_harmonized" or (series == "harmonized" and r["method"] in ("modis_model", "modis_model_terra_only"))
-        source_method = r["method"] if series == "harmonized" else (
-            ("modis_model_terra_only" if (r["year"], r["month"]) < (2002,7) else "modis_model") if series == "modis_harmonized" else series)
+        modelled = series == "modis_harmonized"
+        source_method = (("modis_model_terra_only" if (r["year"], r["month"]) < (2002,7) else "modis_model") if modelled else series)
         sensor = (("MODIS (Terra)" if (r["year"],r["month"]) < (2002,7) else "MODIS (Terra/Aqua)") if series in ("modis_raw","modis_harmonized") else
                   "S-NPP" if series == "viirs_snpp_raw" else r["viirs_src"] if series == "viirs_raw" or not modelled else
                   "MODIS (Terra)" if source_method == "modis_model_terra_only" else "MODIS (Terra/Aqua)")
-        kind = "model_estimate" if modelled else "scaled_reference" if r["method"] == "viirs_scaled" and series in ("harmonized","viirs_raw") else "observed_count"
+        kind = "model_estimate" if modelled else "scaled_reference" if r["method"] == "viirs_scaled" and series == "viirs_raw" else "observed_count"
         cell = {"year":r["year"],"month":r["month"],"value":_r(val),"coverage":round(cov,3),
                 "partial":0 < cov < .999,"method":source_method,"sensor":sensor if val is not None else None,
                 "value_kind":kind if val is not None else "unavailable","baseline_n_years":c["n_years"],
                 "baseline_first_year":c.get("first_year"),"baseline_last_year":c.get("last_year"),
                 "observation_coverage":"unknown"}
-        cell["lo"]=_r(r.get("model_lo") if series == "modis_harmonized" else r.get("lo")) if modelled else None
-        cell["hi"]=_r(r.get("model_hi") if series == "modis_harmonized" else r.get("hi")) if modelled else None
+        cell["lo"]=_r(r.get("model_lo")) if modelled else None
+        cell["hi"]=_r(r.get("model_hi")) if modelled else None
         cell["uncertainty_note"]=("Residual calibration interval; satellite omission/measurement uncertainty is not included." if modelled else
             "Measurement and reference-scaling uncertainty are not quantified; no zero-width interval is implied.")
         if val is not None and c["median"] is not None and cov >= .999:
@@ -264,6 +257,8 @@ def nb_dist(mu: float, alpha: float):
 
 
 def forecast(store: DataStore, weights: pl.DataFrame, eff_cells: float, monthly: pl.DataFrame, b0: int, b1: int) -> dict:
+    if store.fc_report and store.fc_report.get("target_series") != "modis_harmonized":
+        return {"available":False,"reason":"Forecast must be trained on calibrated MODIS history. Rebuild the forecast step."}
     source_version = store.fc_report.get("harmonization_version")
     if store.harm_report.get("method_version", "").startswith("harm-v3") and (source_version != store.harm_report.get("method_version") or store.fc_report.get("harmonization_built_at") != store.harm_report.get("built_at")):
         return {"available":False,"reason":"Forecast was trained with an older harmonization. Rebuild the forecast step."}
@@ -279,7 +274,7 @@ def forecast(store: DataStore, weights: pl.DataFrame, eff_cells: float, monthly:
         al = rep["nb_alpha"][L]
         alpha = _interp_log(max(eff_cells, 1), [(1, al["cell"]), (nc["region"], al["region"]), (nc["country"], al["country"])])
         hist = monthly.filter((pl.col("month") == r["target_month"]) & pl.col("year").is_between(b0, b1)
-                              & (pl.col("coverage") >= 0.999) & pl.col("harmonized").is_not_null())["harmonized"].to_numpy()
+                              & (pl.col("coverage") >= 0.999) & pl.col("modis_harmonized").is_not_null())["modis_harmonized"].to_numpy()
 
         # Back-tested skill for this kind of area (region-sized, or the whole country if that is the AOI)
         lvl = "country" if eff_cells >= max(nc["country"]*.99, store.cells.height*.99) else "region"

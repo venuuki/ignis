@@ -24,9 +24,8 @@ The national reference is VIIRS **S-NPP-equivalent**. The saved southeastern exp
 
 The new workspace includes region presets, bounding-box coordinates, exact drawn polygon/circle geometry and point/radius AOIs; a monthly calendar with intervals; robust anomalies; baseline seasonality; complete-year annual totals, rankings and Mann–Kendall/Sen trends; 1–3 month experimental outlooks with predictive ranges, terciles and back-test skill; MODIS/VIIRS/harmonized comparison; climate anomalies and ENSO/IOD context; hotspot queries; calendar/hotspot CSV and panel PNG export.
 
-Forecast skill selection was corrected: a small single-country AOI no longer inherits the country-level skill score. Nonpositive regional skill retains the climatology fallback. Forecasts always use the harmonized series even if a raw series is displayed elsewhere.
+Forecast skill selection was corrected: a small single-country AOI no longer inherits the country-level skill score. Nonpositive regional skill retains the climatology fallback. Forecasts always use calibrated MODIS history even if a raw series is displayed elsewhere.
 
-Recent regional observations retain the legacy short-date and query-volume limits; use a smaller Australian preset there. The national analysis uses preprocessed data and supports Australia-wide queries. The existing saved calendar is southeastern Australia, 2019–2024 only; it has not been relabelled as a national record. Existing Validation continues to disclose the failed day/night stress test.
 
 ## Verification and limits
 

@@ -24,7 +24,7 @@ def analysis_store(monkeypatch, tmp_path):
     for year in range(2015, 2025):
         for month in range(1, 13):
             value = (year - 2010) * month * 10.
-            monthly.append(dict(cell=cell, year=year, month=month, harmonized=value, harm_var=4., modis=value / 4, viirs_ref=value, modis_harmonized=value, modis_frp=2., snpp_frp=3.))
+            monthly.append(dict(cell=cell, year=year, month=month, modis_model_var=4., modis=value / 4, viirs_ref=value, modis_harmonized=value, modis_frp=2., snpp_frp=3.))
             metadata.append(dict(country='Australia', year=year, month=month, coverage=1., method='viirs_observed', viirs_src='S-NPP', has_modis=True, has_viirs=True))
     store = SimpleNamespace(
         dir=tmp_path,
@@ -33,7 +33,7 @@ def analysis_store(monkeypatch, tmp_path):
         forecasts=pl.DataFrame([dict(cell=cell, lead=l, target_year=2025, target_month=l, mean=100.) for l in (1, 2, 3)]),
         harm_report={'method_version': 'synthetic-test-only', 'variance_model': {}},
         fc_report={
-            'issue_month': '2024-12', 'model_version': 'synthetic-test-only',
+            'target_series': 'modis_harmonized', 'issue_month': '2024-12', 'model_version': 'synthetic-test-only',
             'alpha_ncells': {'region': 25, 'country': 10000},
             'nb_alpha': {str(l): dict(cell=1., region=1., country=.1) for l in (1, 2, 3)},
             'skill': {str(l): dict(region={'crpss': -.1}, country={'crpss': .2}, by_country={'Australia': {'crpss': .2}}) for l in (1, 2, 3)},
@@ -116,3 +116,23 @@ def test_missing_national_data_returns_actionable_503(monkeypatch, tmp_path):
     r = client.get('/api/analysis/meta')
     assert r.status_code == 503
     assert 'Build-Australia.ps1' in r.json()['detail']
+
+
+def test_default_series_is_calibrated_and_source_switch_series_is_rejected(analysis_store):
+    query = dict(aoi=dict(type='region', region='Australia'), start='2015-01', end='2015-01')
+    response = client.post('/api/analysis/calendar', json=query)
+    assert response.status_code == 200
+    assert response.json()['series'] == 'modis_harmonized'
+    assert response.json()['months'][0]['value_kind'] == 'model_estimate'
+    assert client.post('/api/analysis/calendar', json={**query, 'series':'harmonized'}).status_code == 422
+    comparison = client.post('/api/analysis/compare', json=query)
+    assert comparison.status_code == 200
+    assert all('harmonized' not in row for row in comparison.json()['monthly'])
+
+
+def test_forecast_rejects_outputs_trained_on_another_series(analysis_store):
+    analysis_store.fc_report.pop('target_series')
+    response = client.post('/api/analysis/forecast', json={'aoi':{'type':'region','region':'Australia'}})
+    assert response.status_code == 200
+    assert response.json()['available'] is False
+    assert 'calibrated MODIS' in response.json()['reason']

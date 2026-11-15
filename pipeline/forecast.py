@@ -1,6 +1,6 @@
 """Step 4 - 1-3 month probabilistic hotspot forecasts.
 
-Model: LightGBM (Tweedie) at **0.5deg region** level predicting the harmonized hotspot count for
+Model: LightGBM (Tweedie) at **0.5deg region** level predicting the calibrated MODIS hotspot count for
 target month t0+L (L = 1..3) from information available at the end of issue month t0:
   * fire history  - recent counts, 12-month total, same month last year, prior-years
                     climatology of the target month (strictly earlier years -> no leakage),
@@ -51,8 +51,8 @@ SCORE_SAMPLE = 25000  # region-level rows scored per lead (CRPS is computed exac
 def region_panel(cfg: dict) -> pl.DataFrame:
     """Dense region x month harmonized counts (null where the month is not fully observed)."""
     rdeg = cfg["grid"]["region_deg"]
-    mc = pl.read_parquet(PROCESSED / "monthly_cells.parquet", columns=["country", "region_cell", "year", "month", "harmonized"])
-    h = mc.group_by("country", "region_cell", "year", "month").agg(h=pl.col("harmonized").sum())
+    mc = pl.read_parquet(PROCESSED / "monthly_cells.parquet", columns=["country", "region_cell", "year", "month", "modis_harmonized"])
+    h = mc.group_by("country", "region_cell", "year", "month").agg(h=pl.col("modis_harmonized").sum())
     meta = pl.read_parquet(PROCESSED / "monthly_meta.parquet").select("country", "year", "month", "coverage")
     regs = pl.read_parquet(PROCESSED / "cells.parquet").group_by("country", "region_cell").agg(ncell=pl.len())
     m = regs.join(meta, on="country").join(h, on=["country", "region_cell", "year", "month"], how="left")
@@ -202,12 +202,12 @@ def score_level(bt: pl.DataFrame, hist: pl.DataFrame, keys: list[str], alpha: fl
 
 def cell_shares(years: tuple[int, int]) -> pl.DataFrame:
     """Each 0.1deg cell's share of its region's mean harmonized count per calendar month."""
-    mc = pl.read_parquet(PROCESSED / "monthly_cells.parquet", columns=["country", "cell", "region_cell", "year", "month", "harmonized"])
+    mc = pl.read_parquet(PROCESSED / "monthly_cells.parquet", columns=["country", "cell", "region_cell", "year", "month", "modis_harmonized"])
     meta = pl.read_parquet(PROCESSED / "monthly_meta.parquet")
     full = meta.filter((pl.col("coverage") >= 0.999) & pl.col("year").is_between(*years)).group_by("country", "month").agg(ny=pl.len())
     cells = pl.read_parquet(PROCESSED / "cells.parquet").select("country", "cell", "region_cell")
     cm = cells.join(pl.DataFrame({"month": list(range(1, 13))}), how="cross")
-    s = mc.filter(pl.col("year").is_between(*years)).group_by("cell", "month").agg(s=pl.col("harmonized").sum())
+    s = mc.filter(pl.col("year").is_between(*years)).group_by("cell", "month").agg(s=pl.col("modis_harmonized").sum())
     cm = cm.join(s, on=["cell", "month"], how="left").join(full, on=["country", "month"], how="left")
     cm = cm.with_columns(c=(pl.col("s").fill_null(0) / pl.col("ny").fill_null(1)))
     tot = cm.group_by("region_cell", "month").agg(tot=pl.col("c").sum(), n=pl.len())
@@ -245,7 +245,7 @@ def main() -> None:
     # cell-level dispersion: downscale back-test region forecasts with pre-back-test shares
     shares_bt = cell_shares((2003, args.backtest_from - 1))
     rng_regions = bt["region_cell"].unique().sample(min(400, bt["region_cell"].n_unique()), seed=5)
-    mc = pl.read_parquet(PROCESSED / "monthly_cells.parquet", columns=["cell", "year", "month", "harmonized"])
+    mc = pl.read_parquet(PROCESSED / "monthly_cells.parquet", columns=["cell", "year", "month", "modis_harmonized"])
     alphas, skill = {}, {}
     for L in LEADS:
         b = bt.filter(pl.col("lead") == L)
@@ -256,7 +256,7 @@ def main() -> None:
         cb = b.filter(pl.col("region_cell").is_in(rng_regions.implode())).select("region_cell", "t_year", "t_month", "p")
         cb = cb.join(shares_bt, left_on=["region_cell", "t_month"], right_on=["region_cell", "month"])
         cb = cb.join(mc, left_on=["cell", "t_year", "t_month"], right_on=["cell", "year", "month"], how="left")
-        al["cell"] = round(fit_alpha(cb["harmonized"].fill_null(0).to_numpy(), (cb["p"] * cb["share"]).to_numpy()), 4)
+        al["cell"] = round(fit_alpha(cb["modis_harmonized"].fill_null(0).to_numpy(), (cb["p"] * cb["share"]).to_numpy()), 4)
         alphas[str(L)] = al
         skill[str(L)] = {"region": score_level(b, hist, ["region_cell"], al["region"], SCORE_SAMPLE),
                          "country": score_level(b, hist, ["country"], al["country"])}
@@ -287,7 +287,8 @@ def main() -> None:
     bt.select("country", "region_cell", "lead", "t_year", "t_month", "y", "p").write_parquet(PROCESSED / "forecast_backtest.parquet")
 
     report = {
-        "model_version": "fc-lgbm-v3.0-region",
+        "model_version": "fc-lgbm-v3.1-calibrated-region",
+        "target_series": "modis_harmonized",
         "harmonization_built_at": json.loads((PROCESSED / "harmonization_report.json").read_text()).get("built_at"),
         "validation_note":"Rolling-origin skill conditional on retrospectively calibrated history; not a fully prospective end-to-end validation.",
         "harmonization_version": json.loads((PROCESSED / "harmonization_report.json").read_text())["method_version"],

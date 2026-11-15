@@ -1,4 +1,4 @@
-"""Keep native S-NPP diagnostics independent of the sparsified combined record."""
+"""Keep native S-NPP diagnostics independent of the sparse monthly model table."""
 from pipeline.common import PROCESSED
 import duckdb
 import polars as pl

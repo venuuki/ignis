@@ -1,5 +1,5 @@
 {
-  "method_version": "harm-v3.0-independent-test",
+  "method_version": "harm-v3.1-calibrated-only",
   "unit": "VIIRS S-NPP-equivalent hotspots",
   "countries": [
     "Australia"
@@ -237,8 +237,8 @@
       },
       "harm": {
         "change_point": "2011-02",
-        "K": 2520.0,
-        "p_value": 0.00068,
+        "K": 2418.0,
+        "p_value": 0.00128,
         "jump_at_2012_factor": 1.19
       }
     }
@@ -246,7 +246,7 @@
   "rows_stored": 2131904,
   "data_last_date": "2026-11-14",
   "evaluation_protocol": "Training-only climatology and platform scaling; calibration years choose the model and fit residual intervals; disjoint final test years assess performance. Production model refitted after frozen test predictions.",
-  "reference_policy": "Measured S-NPP where available, scaled NOAA platforms for reference gaps, calibrated MODIS where no VIIRS reference is available. Overlap sensors are never added or averaged.",
+  "reference_policy": "S-NPP and scaled NOAA observations supply the training and comparison reference only. The historical activity series is calibrated MODIS for every available month; there is no sensor-switching output.",
   "uncertainty_scope": "Residual calibration uncertainty for MODIS estimates only; satellite measurement/omission uncertainty is unknown. No zero-width confidence interval is assigned to measured or scaled reference values.",
   "coverage_scope": "Temporal span of supplied partitions, not cloud-free viewing exposure. A zero is no recorded quality-filtered detections, not evidence of no fire.",
   "limitations": [
@@ -254,5 +254,15 @@
     "Observation opportunities, clouds and missed fires are not recovered from hotspot-only files.",
     "Retrospective transfer to 2000\u20132011 and orbit drift remain sources of uncertainty."
   ],
-  "built_at": "2026-11-15T06:15:59.878532+00:00"
+  "built_at": "2026-11-15T12:58:37.150500+00:00",
+  "output_series": "modis_harmonized",
+  "output_policy_migration": {
+    "previous_version": "harm-v3.0-independent-test",
+    "calibration_refitted": false,
+    "calibrated_values_and_variance_unchanged": true,
+    "removed_columns": [
+      "harmonized",
+      "harm_var"
+    ]
+  }
 }

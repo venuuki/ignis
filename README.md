@@ -1,6 +1,6 @@
 # Embercal ? Australia burning activity calendar
 
-Embercal is an Australia-focused NASA Space Apps research prototype. It puts MODIS history and VIIRS continuity on a common reference scale, with explicit data sources and independent model testing. The existing Revamp visual design, OpenStreetMap, Natural Earth fallback and original research archives are retained.
+Embercal is an Australia-focused NASA Space Apps research prototype. It puts MODIS history and VIIRS continuity on a common reference scale, with explicit data sources and independent model testing. The existing Revamp visual design, OpenStreetMap, Natural Earth fallback are retained.
 
 ## Open the app
 
@@ -12,7 +12,7 @@ powershell -ExecutionPolicy Bypass -File .\Start.ps1
 
 Open http://127.0.0.1:8010. Australia analysis is the main workspace. Select the national record, an Australian preset, coordinates, a point/radius, or a drawn polygon/circle, and select **Analyse this area**.
 
-The five measures are the combined historical record, calibrated MODIS estimates, native MODIS observations, the gap-filled VIIRS reference, and native S-NPP observations. A modelled month, observed month and scaled-reference month are identified separately. The calibrated-MODIS view exposes the actual model outputs throughout the overlap; the combined record deliberately uses the reference when available rather than adding overlapping sensors.
+The default harmonized series is calibrated MODIS throughout the historical record. Three separate observation/reference measures remain for comparison: native MODIS, the gap-filled VIIRS reference, and native S-NPP. No sensor-switching historical series is generated. Forecasts are trained on calibrated MODIS history.
 
 ## What changed in v3
 
@@ -27,8 +27,7 @@ The calibration years selected a global day/night-ratio transfer for the main re
 - **Harmonization:** compare native MODIS, calibrated MODIS and the VIIRS reference; separately inspect frozen final-test predictions and errors for the actual selected area.
 - **Seasons / trends:** baseline seasonality, complete-year totals, rankings and Mann?Kendall/Sen summaries.
 - **Forecast / Climate:** rebuilt experimental outlooks, actual measured skill, historical-baseline fallback for subnational areas without positive regional skill, and dated climate context.
-- **Methods / Model validation:** current generated protocol, all candidate test results, uncertainty performance and remaining limitations.
-- **Original study archive / experiment:** the original southeastern 2019?2024 study and its failed day/night stress test remain separate. The original study's 2025 holdout policy is unchanged.
+- **Offline methods document:** calibration protocol, candidate test results, uncertainty performance and limitations are in `docs/EmberCal_Calibration_and_Data_Methods.docx`.
 
 CSV and PNG exports use the actual area and metric. Calendar exports include provenance, model version, baseline and observation-coverage caveats. Daily and final-test CSVs preserve sensor/measurement context.
 

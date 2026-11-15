@@ -25,11 +25,9 @@ app = APIRouter(prefix="/api/analysis", tags=["Australia analysis"])
 _wcache: LRUCache = LRUCache(maxsize=256)
 UNIT = "VIIRS S-NPP-equivalent hotspots"
 SERIES_INFO = {
- "harmonized": {"label":"Combined historical record", "unit":UNIT, "description":"Calibrated MODIS before the reference exists; VIIRS reference when available. Overlapping sensors are not added."},
- "modis_harmonized": {"label":"Calibrated MODIS estimate", "unit":UNIT, "description":"Model predictions from MODIS throughout the record, including the overlap years. Production predictions are not independent validation."},
- "modis_raw": {"label":"MODIS observations", "unit":"Quality-filtered MODIS detections", "description":"Terra/Aqua native counts aggregated to the analysis grid."},
+ "modis_harmonized": {"label":"Harmonized", "unit":UNIT, "description":"Model predictions from MODIS throughout the record, including the overlap years. Production predictions are not independent validation."},
+ "modis_raw": {"label":"MODIS", "unit":"Quality-filtered MODIS detections", "description":"Terra/Aqua native counts aggregated to the analysis grid."},
  "viirs_raw": {"label":"VIIRS reference", "unit":UNIT, "description":"Measured S-NPP, with NOAA-20/21 scaled to S-NPP units where the reference is unavailable. This is not always raw VIIRS."},
- "viirs_snpp_raw": {"label":"S-NPP observations only", "unit":"Quality-filtered S-NPP detections", "description":"Native S-NPP records only, independent of the combined record. Months without supplied S-NPP detections are unavailable; viewing coverage remains unknown."},
 }
 
 
@@ -127,7 +125,7 @@ def forecast(q: Query):
     res = an.forecast(s, w, summary["effective_cells"], monthly, b0, b1)
     # recent observed context for the fan chart
     recent = monthly.filter(pl.col("coverage") >= 0.999).sort("year", "month").tail(24)
-    res["recent"] = [{"year": r["year"], "month": r["month"], "value": an._r(r["harmonized"])} for r in recent.iter_rows(named=True)]
+    res["recent"] = [{"year": r["year"], "month": r["month"], "value": an._r(r["modis_harmonized"])} for r in recent.iter_rows(named=True)]
     res["aoi"] = summary
     res["unit"] = UNIT
     return res
@@ -141,11 +139,11 @@ def compare(q: Query):
     start, end = an.ym_int(q.start, (2000, 11)), an.ym_int(q.end, s.latest)
     m = monthly.filter((pl.col("year") * 100 + pl.col("month")).is_between(start, end) & (pl.col("coverage") > 0))
     rows = [{"year": r["year"], "month": r["month"], "modis_raw": an._r(r["modis_raw"]), "viirs_raw": an._r(r["viirs_raw"]),
-             "modis_harmonized": an._r(r["modis_harmonized"]), "harmonized": an._r(r["harmonized"]), "method": r["method"]}
+             "modis_harmonized": an._r(r["modis_harmonized"]), "method": "modis_model_terra_only" if (r["year"],r["month"]) < (2002,7) else "modis_model"}
             for r in m.iter_rows(named=True)]
     ann = m.filter(pl.col("coverage") >= 0.999).group_by("year").agg(
         pl.col("modis_raw").sum(), pl.col("viirs_raw").sum(),
-        pl.col("modis_harmonized").sum(), pl.col("harmonized").sum(), n=pl.len()).filter(pl.col("n") == 12).sort("year")
+        pl.col("modis_harmonized").sum(), n=pl.len()).filter(pl.col("n") == 12).sort("year")
     overlap = m.filter(pl.col("viirs_raw").is_not_null() & (pl.col("coverage") >= 0.999))
     ov = {}
     if overlap.height >= 12:

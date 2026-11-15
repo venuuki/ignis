@@ -15,7 +15,7 @@ import polars as pl
 from pipeline import harmonize as h
 from pipeline.common import PROCESSED, load_config
 
-VERSION = 'harm-v3.0-independent-test'
+VERSION = 'harm-v3.1-calibrated-only'
 
 def split_years(config):
     c=config['harmonization']; first,last=c['overlap_years']
@@ -113,7 +113,7 @@ def main():
     for name,model in [('full',full),('terra',terra)]:
         if isinstance(model,h.GradientBoosting): model.model.save_model(str(PROCESSED/f'harmonization_{name}_model.txt'))
     del production;gc.collect()
-    print('5/6 Writing calibrated MODIS, observed reference and source-aware combined record ...',flush=True)
+    print('5/6 Writing calibrated MODIS and separate observed reference ...',flush=True)
     stored=[];totals=[];years=sorted(t.months['year'].unique().to_list())
     for country in t.country_codes:
         for i in range(0,len(years),h.YEARS_PER_CHUNK):
@@ -121,18 +121,15 @@ def main():
             pf,pt=full.predict(r),terra.predict(r)
             converted=np.where(aqua,pf,pt)
             model_var=np.where(aqua,variance(pf,uncertainty['full']),variance(pt,uncertainty['terra_only']))
-            reference=r['y'].to_numpy();has_reference=r['y'].is_not_null().to_numpy();available=r['coverage'].to_numpy()>0
-            combined=np.where(available,np.where(has_reference,reference,converted),np.nan)
+            available=r['coverage'].to_numpy()>0
             r=r.with_columns(
                 modis_harmonized=pl.Series(np.where(available,converted,np.nan),dtype=pl.Float32).fill_nan(None),
                 modis_model_var=pl.Series(np.where(available,model_var,np.nan),dtype=pl.Float32).fill_nan(None),
-                harmonized=pl.Series(combined,dtype=pl.Float32).fill_nan(None),
-                harm_var=pl.Series(np.where(available & ~has_reference,model_var,0.),dtype=pl.Float32),
                 viirs_ref=pl.col('y'),snpp=pl.col('snpp_d')+pl.col('snpp_n'),n20=pl.col('n20_d')+pl.col('n20_n'),n21=pl.col('n21_d')+pl.col('n21_n'))
-            totals.append(r.filter(pl.col('coverage')>0).group_by('country','year','month').agg(pl.col('modis').sum(),pl.col('harmonized').sum(),y=pl.col('y').fill_null(0).sum()))
+            totals.append(r.filter(pl.col('coverage')>0).group_by('country','year','month').agg(pl.col('modis').sum(),pl.col('modis_harmonized').sum(),y=pl.col('y').fill_null(0).sum()))
             # Keep predictions even when observed VIIRS is zero: they are essential for assessing the model.
-            keep=(pl.col('harmonized')>=h.MIN_STORED_VALUE)|(pl.col('modis_harmonized')>=h.MIN_STORED_VALUE)|(pl.col('modis')>0)|(pl.col('viirs_ref').fill_null(0)>0)
-            stored.append(r.filter(pl.col('harmonized').is_not_null()&keep).select('country','cell','region_cell','year','month','terra','aqua','modis','snpp','n20','n21','viirs_ref','modis_harmonized','modis_model_var','harmonized','harm_var','modis_frp','snpp_frp'))
+            keep=(pl.col('modis_harmonized')>=h.MIN_STORED_VALUE)|(pl.col('modis')>0)|(pl.col('viirs_ref').fill_null(0)>0)
+            stored.append(r.filter(pl.col('modis_harmonized').is_not_null()&keep).select('country','cell','region_cell','year','month','terra','aqua','modis','snpp','n20','n21','viirs_ref','modis_harmonized','modis_model_var','modis_frp','snpp_frp'))
             print(f'  {country} {years[i]}–{years[min(i+1,len(years)-1)]}',flush=True)
     monthly=pl.concat(stored);atomic_parquet(monthly,PROCESSED/'monthly_cells.parquet');atomic_parquet(t.cells,PROCESSED/'cells.parquet')
     meta=(pl.DataFrame({'country':list(t.country_codes)}).join(t.months,how='cross').join(t.availability,on=['year','month'],how='left').select('country','year','month','coverage',
@@ -146,7 +143,8 @@ def main():
         gbm_feature_importance=feature_importance,features=h.FEATURES_FULL,terra_features=h.FEATURES_TERRA_ONLY,
         noaa20_to_snpp_ratio=t.ratios,step_change_tests=h.sensor_switch_test(pl.concat(totals)),rows_stored=monthly.height,data_last_date=str(last_date),
         evaluation_protocol='Training-only climatology and platform scaling; calibration years choose the model and fit residual intervals; disjoint final test years assess performance. Production model refitted after frozen test predictions.',
-        reference_policy='Measured S-NPP where available, scaled NOAA platforms for reference gaps, calibrated MODIS where no VIIRS reference is available. Overlap sensors are never added or averaged.',
+        output_series='modis_harmonized',
+        reference_policy='S-NPP and scaled NOAA observations supply the training and comparison reference only. The historical activity series is calibrated MODIS for every available month; there is no sensor-switching output.',
         uncertainty_scope='Residual calibration uncertainty for MODIS estimates only; satellite measurement/omission uncertainty is unknown. No zero-width confidence interval is assigned to measured or scaled reference values.',
         coverage_scope='Temporal span of supplied partitions, not cloud-free viewing exposure. A zero is no recorded quality-filtered detections, not evidence of no fire.',
         limitations=['Sensor-reference agreement is not independent ground truth.','Observation opportunities, clouds and missed fires are not recovered from hotspot-only files.','Retrospective transfer to 2000–2011 and orbit drift remain sources of uncertainty.'],
