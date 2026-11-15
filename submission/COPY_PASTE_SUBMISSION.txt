@@ -1,0 +1,217 @@
+EMBERCAL SUBMISSION TEXT
+
+Copy the content under each field heading into its matching form field. Do not paste these instructions. The summary below is within the 1,500-character field limit.
+
+PROJECT NAME
+EmberCal
+
+SUMMARY
+EmberCal is an Australia-focused web application that makes NASA MODIS and VIIRS hotspot records more comparable across satellite generations. We aggregate quality-filtered detections into common monthly grid cells and learn separate daytime and nighttime relationships during the sensors’ overlap. The calendar expresses historical MODIS activity on a VIIRS S-NPP-equivalent scale, with VIIRS continuation after supplied MODIS support ends.
+
+Users can select a region, enter coordinates or draw an area, explore fire seasonality, compare the latest complete month with a historical baseline, inspect recent NASA FIRMS detections, and download CSV or PNG outputs.
+
+On frozen 2019–2021 national test predictions, monthly count error against the VIIRS reference falls from 79.4% for raw MODIS to 10.2% after calibration, measured by WAPE. We report remaining uncertainty and regional variation. EmberCal supports historical research and preparedness planning; actual user impact and prospective performance remain to be validated.
+
+PROJECT DETAILS
+WHAT WE BUILT
+
+EmberCal is a working Australian prototype for the Harmonization of MODIS and VIIRS Hot Spots challenge. It connects a consistent monthly burning-activity calendar with an interactive area selector, recent satellite observations, seasonal comparisons and downloadable results. The installed historical record spans November 2000 to 14 November 2026. Recent observations use a separate NASA FIRMS feed.
+
+THE PROBLEM
+
+MODIS and VIIRS have different pixel sizes, detection sensitivities and observation schedules. A change in raw hotspot counts can therefore reflect the instrument as well as fire activity. A long historical calendar needs a common reference scale before users compare periods across satellite generations.
+
+HOW HARMONIZATION WORKS
+
+We retain source metadata and quality-filtered observations, aggregate detections into common 0.1-degree geographic cells and calendar months, and separate daytime and nighttime counts. During overlap years, we learn the relationship between MODIS and a VIIRS S-NPP reference. The deployed main model uses separate day and night multipliers; a separately fitted LightGBM model handles early Terra-only history before July 2002.
+
+Model fitting, selection and testing have distinct year sets. Training uses 2013, 2016, 2018 and 2023; calibration uses 2017 and 2022; frozen evaluation uses 2019–2021. We save evaluation predictions before refitting the production model. Harmonized history preserves calibrated MODIS while supported, then continues with the VIIRS reference after the final supplied MODIS month. The reference can use scaled NOAA observations when S-NPP is unavailable. We neither add nor average overlapping sensor counts.
+
+WHAT A USER CAN DO
+
+Users start with Australia nationally, then choose a preset, enter coordinates, select a point and radius, or draw an area. They can compare the same calendar month across years, inspect source markers and partial months, identify the usual active window, and compare the latest complete month with a chosen historical baseline. A separate recent-hotspot map offers rolling 24-hour, 72-hour and seven-day views, confidence filters, observation details and CSV download. Historical calendar and summary outputs can be downloaded as CSV or PNG.
+
+For example, the installed national Harmonized record shows approximately 108,010 reference-scale detections for October 2026, compared with a baseline October median of 154,714 using 2003–2022. This is about 69.8% of the median and historical percentile 20. November is incomplete and is excluded from that full-month comparison. Percentile and percentage of median describe different comparisons.
+
+EVIDENCE AND LIMITS
+
+On the frozen 2019–2021 national test, monthly WAPE against the VIIRS reference falls from 79.4% for raw MODIS to 10.2% after calibration. Harmonized WAPE is 13.5%, 11.6% and 21.5% in fixed northern, southeastern and southwestern samples respectively. These are geographic subsets of temporal tests, not spatially unseen regions or independent field validation.
+
+We retain approximate residual ranges and disclose that nominal 80% national coverage is only 72.2% on the original test. We withhold false zero-width ranges, full-month anomaly labels for partial months, and classification labels with fewer than five baseline values. Offline regional candidates that worsened southern results did not replace production. Experimental climate-based outlooks remain secondary; the app withholds unskillful outlooks when insufficient baseline history prevents a fallback.
+
+Hotspots are detections, not unique fires or burned area. Cloud-free observation exposure and missed fires remain unresolved. The live feed does not automatically retrain the historical calendar. Actual target-user sessions and genuinely new prospective evaluation remain future evidence needs.
+
+CREATIVITY AND INTENDED IMPACT
+
+Our contribution combines transparent sensor transfer with a location-specific workflow that preserves source, baseline and uncertainty information through visualization and export. We favour validated comparability over unnecessary model complexity. The intended audience is Australian land managers, preparedness analysts and fire researchers who need historical context. EmberCal supports research and planning; it is not an evacuation, dispatch or fire-spread system.
+
+TOOLS
+
+We use Python and FastAPI for the API; Polars, DuckDB, NumPy, SciPy and Shapely for data and geometry; and LightGBM for the early-period calibration and experimental outlooks. The frontend uses React, TypeScript, MapLibre GL and Terra Draw, with OpenStreetMap and Natural Earth mapping. NASA FIRMS supplies the fire observations. NASA POWER and NOAA climate indices support the separate experimental climate/outlook components. The statistical fitting runs locally, without an external model inference API.
+
+USE OF SUPER INTELLIGENCE
+We used OpenAI ChatGPT and Codex to assist with implementation choices, code generation, debugging, data-analysis scripts, technical explanations, documentation and submission writing. The team set the project objective and Australian prototype scope. We also use locally fitted statistical and machine-learning models, including LightGBM, within the application.
+
+The satellite observations are external source records, not SI-generated data. No synthetic satellite detections, generated satellite photographs, generated video or generated audio are presented as observations. Screenshots show the application; charts derive from saved evaluation results. The deck includes a visible SI-assistance disclosure and source notes. The team remains responsible for reviewing the submitted code, claims and materials.
+
+SI CHECKBOX GUIDE
+Supported by this project: Data Analysis and Interpretation; Research or Information Gathering; Coding, Debugging, or Troubleshooting; Building SI/ML Into the Project. Select Ideation or Brainstorming as well only where it describes your actual team use. Do not select I did not use SI.
+
+NASA DATA AND RESOURCES
+
+Link Text: NASA FIRMS fire observation access
+Link URL: https://firms.modaps.eosdis.nasa.gov/
+
+Link Text: NASA FIRMS MODIS active fire product and fields
+Link URL: https://firms.modaps.eosdis.nasa.gov/content/descriptions/FIRMS_MODIS_Firehotspots.html
+
+Link Text: NASA FIRMS VIIRS active fire product and fields
+Link URL: https://firms.modaps.eosdis.nasa.gov/content/descriptions/FIRMS_VIIRS_Firehotspots.html
+
+Link Text: NASA FIRMS API documentation
+Link URL: https://firms.modaps.eosdis.nasa.gov/content/academy/data_api/firms_api_use.html
+
+Link Text: NASA POWER climate data and API
+Link URL: https://power.larc.nasa.gov/
+
+Link Text: NASA POWER monthly API documentation
+Link URL: https://power.larc.nasa.gov/docs/services/api/temporal/monthly/
+
+Link Text: NASA NTRS background research on SNPP and NOAA 20 calibration
+Link URL: https://ntrs.nasa.gov/citations/20230018284
+
+SPACE AGENCY PARTNER AND OTHER DATA RESOURCES
+
+Link Text: NOAA CPC Oceanic Nino Index
+Link URL: https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt
+
+Link Text: NOAA PSL Dipole Mode Index
+Link URL: https://psl.noaa.gov/gcos_wgsp/Timeseries/Data/dmi.had.long.data
+
+Link Text: OpenStreetMap data and attribution
+Link URL: https://www.openstreetmap.org/copyright
+
+Link Text: Natural Earth mapping data and public domain terms
+Link URL: https://www.naturalearthdata.com/about/terms-of-use/
+
+Link Text: Continuity between NASA MODIS Collection 6.1 and VIIRS Collection 2 land products
+Link URL: https://doi.org/10.1016/j.rse.2023.113963
+
+Link Text: Comparison of Fire Radiative Power Estimates From VIIRS and MODIS Observations
+Link URL: https://repository.library.noaa.gov/view/noaa/49896
+
+Link Text: Python
+Link URL: https://www.python.org/
+
+Link Text: FastAPI
+Link URL: https://fastapi.tiangolo.com/
+
+Link Text: Uvicorn
+Link URL: https://www.uvicorn.org/
+
+Link Text: Polars
+Link URL: https://pola.rs/
+
+Link Text: DuckDB
+Link URL: https://duckdb.org/
+
+Link Text: NumPy
+Link URL: https://numpy.org/
+
+Link Text: SciPy
+Link URL: https://scipy.org/
+
+Link Text: SciPy negative binomial documentation
+Link URL: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.nbinom.html
+
+Link Text: pandas
+Link URL: https://pandas.pydata.org/
+
+Link Text: Shapely
+Link URL: https://shapely.readthedocs.io/
+
+Link Text: LightGBM
+Link URL: https://lightgbm.readthedocs.io/en/stable/
+
+Link Text: React
+Link URL: https://react.dev/
+
+Link Text: TypeScript
+Link URL: https://www.typescriptlang.org/
+
+Link Text: Vite
+Link URL: https://vite.dev/
+
+Link Text: Node.js
+Link URL: https://nodejs.org/
+
+Link Text: MapLibre GL JS
+Link URL: https://maplibre.org/maplibre-gl-js/docs/
+
+Link Text: Terra Draw
+Link URL: https://github.com/JamesLMilner/terra-draw
+
+Link Text: Lucide icons
+Link URL: https://lucide.dev/
+
+Link Text: html to image
+Link URL: https://github.com/bubkoo/html-to-image
+
+Link Text: jsPDF
+Link URL: https://github.com/parallax/jsPDF
+
+Link Text: Inter typeface
+Link URL: https://rsms.me/inter/
+
+Link Text: Segoe UI typeface information
+Link URL: https://learn.microsoft.com/en-us/typography/font-list/segoe-ui
+
+Link Text: OpenAI ChatGPT and Codex assistance
+Link URL: https://openai.com/
+
+Link Text: Requests HTTP client
+Link URL: https://requests.readthedocs.io/
+
+Link Text: HTTPX HTTP client
+Link URL: https://www.python-httpx.org/
+
+Link Text: Pydantic and settings validation
+Link URL: https://docs.pydantic.dev/
+
+Link Text: PyYAML
+Link URL: https://pyyaml.org/
+
+Link Text: cachetools
+Link URL: https://cachetools.readthedocs.io/
+
+Link Text: python dotenv
+Link URL: https://github.com/theskumar/python-dotenv
+
+Link Text: pyproj
+Link URL: https://pyproj4.github.io/pyproj/
+
+Link Text: scikit learn
+Link URL: https://scikit-learn.org/
+
+Link Text: Matplotlib
+Link URL: https://matplotlib.org/
+
+Link Text: pytest testing tools
+Link URL: https://docs.pytest.org/
+
+Link Text: Playwright browser testing
+Link URL: https://playwright.dev/
+
+RESOURCE CONTEXT
+NASA FIRMS is the fire-observation source. NASA POWER and NOAA indices support separate experimental climate/outlook components, not the main count-calibration multipliers. The NTRS calibration paper concerns radiometric/reflectance continuity; it does not validate our hotspot-count multipliers. The FRP paper is background only; EmberCal does not claim to harmonize FRP or burned area. Screenshots are team application captures with map attribution. Charts use project evaluation outputs.
+
+PROJECT DEMONSTRATION LINK
+Upload EmberCal_Seven_Slide_Demo.pptx to a public host and paste its actual complete https URL into the form. Test public access without signing in. No hosting URL has been supplied or invented.
+
+FINAL PROJECT LINK
+Paste the actual public app, repository or project-folder URL after publishing. Include the working project or runnable source and documentation. A localhost URL or a Windows file path will not work for judges.
+
+BEFORE SUBMITTING
+Confirm that the displayed team names match your registered team. Review all claims and resource credits. Confirm public access to the project and seven-slide demo. The team owner must personally confirm the required terms and originality declarations and use Submit for Judging. These confirmations have not been made on your behalf.
+
+Guide: https://www.spaceappschallenge.org/resources/project-submission-guide/

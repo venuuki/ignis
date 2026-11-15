@@ -70,7 +70,8 @@ def aoi_monthly(store: DataStore, weights: pl.DataFrame, eff_cells: float) -> pl
     countries = weights.join(store.cells.select("cell", "country"), on="cell")["country"].unique()
     meta = store.meta.filter(pl.col("country").is_in(countries.implode())).group_by("year", "month").agg(
         coverage=pl.col("coverage").max(), method=pl.col("method").mode().first(),
-        viirs_src=pl.col("viirs_src").drop_nulls().mode().first())
+        viirs_src=pl.col("viirs_src").drop_nulls().mode().first(),
+        **({"has_modis": pl.col("has_modis").all()} if "has_modis" in store.meta.columns else {}))
     native=getattr(store,"native_snpp",None)
     if native is not None:
         counts=native.join(weights,on="cell").group_by("year","month").agg(viirs_snpp_raw=(pl.col("snpp")*pl.col("w")).sum())
@@ -88,6 +89,17 @@ def aoi_monthly(store: DataStore, weights: pl.DataFrame, eff_cells: float) -> pl
         frp_modis=zero("frp_modis"), frp_snpp=zero("frp_snpp"),
         viirs_snpp_raw=pl.when(has_data & pl.col("_snpp_present").fill_null(False)).then(pl.col("viirs_snpp_raw").fill_null(0)).otherwise(None),
         viirs_raw=pl.when(has_data & viirs_era).then(pl.col("viirs_raw").fill_null(0)).otherwise(None),
+    )
+    # Preserve overlap calibration; continue only where archive support says MODIS ended.
+    has_modis = pl.col("has_modis") if "has_modis" in m.columns else pl.lit(True)
+    early_method = pl.when((pl.col("year")*100+pl.col("month")) < 200207).then(pl.lit("modis_model_terra_only")).otherwise(pl.lit("modis_model"))
+    m = m.with_columns(
+        harmonization_method=pl.when(has_data & has_modis).then(early_method)
+            .when(has_data & viirs_era).then(pl.col("method")).otherwise(pl.lit("no_data")),
+        modis_raw=pl.when(has_modis).then(pl.col("modis_raw")).otherwise(None),
+        modis_harmonized=pl.when(has_modis).then(pl.col("modis_harmonized"))
+            .when(viirs_era).then(pl.col("viirs_raw")).otherwise(None),
+        model_var=pl.when(has_modis).then(pl.col("model_var")).otherwise(None),
     )
     terra_vm=store.harm_report.get("variance_model",{}).get("terra_only",vm)
     terra_kappa=_interp_log(max(eff_cells,1.),[(1,1.),(25,terra_vm.get("kappa_region",1.)),(1000,terra_vm.get("kappa_country",1.))])
@@ -126,12 +138,17 @@ def calendar(store: DataStore, monthly: pl.DataFrame, series: str, start: int, e
     for r in sel.iter_rows(named=True):
         c = clim[r["month"]]
         val, proj, cov = r["value"], r["projected"], r["coverage"] or 0
-        modelled = series == "modis_harmonized"
+        harmonized = series == "modis_harmonized"
+        continuation = harmonized and r.get("harmonization_method") in ("viirs_observed", "viirs_scaled")
+        modelled = harmonized and not continuation
         source_method = (("modis_model_terra_only" if (r["year"], r["month"]) < (2002,7) else "modis_model") if modelled else series)
         sensor = (("MODIS (Terra)" if (r["year"],r["month"]) < (2002,7) else "MODIS (Terra/Aqua)") if series in ("modis_raw","modis_harmonized") else
                   "S-NPP" if series == "viirs_snpp_raw" else r["viirs_src"] if series == "viirs_raw" or not modelled else
                   "MODIS (Terra)" if source_method == "modis_model_terra_only" else "MODIS (Terra/Aqua)")
-        kind = "model_estimate" if modelled else "scaled_reference" if r["method"] == "viirs_scaled" and series == "viirs_raw" else "observed_count"
+        if continuation:
+            source_method = r["harmonization_method"]
+            sensor = r["viirs_src"]
+        kind = "scaled_reference" if continuation and source_method == "viirs_scaled" else "observed_count" if continuation else "model_estimate" if modelled else "scaled_reference" if r["method"] == "viirs_scaled" and series == "viirs_raw" else "observed_count"
         cell = {"year":r["year"],"month":r["month"],"value":_r(val),"coverage":round(cov,3),
                 "partial":0 < cov < .999,"method":source_method,"sensor":sensor if val is not None else None,
                 "value_kind":kind if val is not None else "unavailable","baseline_n_years":c["n_years"],
@@ -139,7 +156,14 @@ def calendar(store: DataStore, monthly: pl.DataFrame, series: str, start: int, e
                 "observation_coverage":"unknown"}
         cell["lo"]=_r(r.get("model_lo")) if modelled else None
         cell["hi"]=_r(r.get("model_hi")) if modelled else None
-        cell["uncertainty_note"]=("Residual calibration interval; satellite omission/measurement uncertainty is not included." if modelled else
+        has_interval = modelled and cell["lo"] is not None and cell["hi"] is not None and cell["hi"] > cell["lo"]
+        if not has_interval:
+            cell["lo"] = cell["hi"] = None
+        cell["uncertainty_status"] = "approximate_residual_range" if has_interval else "not_quantified"
+        cell["nominal_interval_coverage"] = .8 if has_interval else None
+        cell["interval_validated_for_selection"] = False
+        cell["baseline_status"] = "sufficient_for_summary" if c["n_years"] >= 5 else "limited" if c["n_years"] else "unavailable"
+        cell["uncertainty_note"]=("Approximate nominal 80% residual range. Coverage varies by area and year and is not guaranteed for this selection; satellite omission/measurement uncertainty is excluded." if has_interval else "No residual range is quantified for this estimate; zero recorded detections do not imply zero uncertainty." if modelled else
             "Measurement and reference-scaling uncertainty are not quantified; no zero-width interval is implied.")
         if val is not None and c["median"] is not None and cov >= .999:
             x = proj
@@ -150,7 +174,7 @@ def calendar(store: DataStore, monthly: pl.DataFrame, series: str, start: int, e
             lab = label_for(cell["percentile"])
             if not cell["partial"] and c.get("record_max") is not None and x >= c["record_max"] and x > 0 and c["n_years"] >= 5:
                 lab = "Record high"
-            cell["label"] = lab
+            cell["label"] = lab if c["n_years"] >= 5 else None
         rows.append(cell)
 
     # annual totals (complete years only are used for ranking/trend)
@@ -186,7 +210,7 @@ def current_status(m: pl.DataFrame, clim: dict, store: DataStore) -> dict:
         if c["median"] is not None and cov >= .999:
             d["percent_of_median"] = round(proj / c["median"] * 100, 1) if c["median"] > 0 else None
             d["percentile"] = _r(percentile_rank(c["_v"], proj), 1)
-            d["label"] = label_for(d["percentile"])
+            d["label"] = label_for(d["percentile"]) if c["n_years"] >= 5 else None
             d["difference"] = _r(proj - c["median"])
         if cov < 0.999:
             d["note"] = f"Partial month: partition span covers {cov*100:.0f}% of calendar days. Count is not extrapolated; full-month anomaly is withheld. This is not satellite viewing coverage."
@@ -258,7 +282,9 @@ def nb_dist(mu: float, alpha: float):
 
 def forecast(store: DataStore, weights: pl.DataFrame, eff_cells: float, monthly: pl.DataFrame, b0: int, b1: int) -> dict:
     if store.fc_report and store.fc_report.get("target_series") != "modis_harmonized":
-        return {"available":False,"reason":"Forecast must be trained on calibrated MODIS history. Rebuild the forecast step."}
+        return {"available":False,"reason":"Forecast must be trained on the harmonized history. Rebuild the forecast step."}
+    if "harmonization_method" in monthly.columns and monthly.filter(pl.col("harmonization_method").is_in(["viirs_observed","viirs_scaled"])).height and store.fc_report.get("source_policy") != "modis_then_viirs_v1":
+        return {"available":False,"reason":"The record now includes VIIRS continuation. Rebuild forecasts using the continuous history."}
     source_version = store.fc_report.get("harmonization_version")
     if store.harm_report.get("method_version", "").startswith("harm-v3") and (source_version != store.harm_report.get("method_version") or store.fc_report.get("harmonization_built_at") != store.harm_report.get("built_at")):
         return {"available":False,"reason":"Forecast was trained with an older harmonization. Rebuild the forecast step."}
@@ -287,6 +313,8 @@ def forecast(store: DataStore, weights: pl.DataFrame, eff_cells: float, monthly:
         e = {"lead": r["lead"], "target_year": r["target_year"], "target_month": r["target_month"],
              "target": f"{month_abbr[r['target_month']]} {r['target_year']}",
              "skill": {"level": lvl, **sk}, "skillful": skillful}
+        if not skillful and len(hist) < 5:
+            return {"available":False,"reason":"This outlook has no positive measured skill and fewer than five complete baseline years for a historical fallback. Widen the baseline."}
         if not skillful and len(hist) >= 5:
             # Safety rule: the model did not beat climatology in back-tests here, so we show the
             # climatological outlook (the historical spread of this calendar month) instead.

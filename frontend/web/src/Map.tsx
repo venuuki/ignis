@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { createRoot } from 'react-dom/client';
+import { flushSync } from 'react-dom';
+import HotspotPopup from './HotspotPopup';
 import * as maplibregl from "maplibre-gl";
 import mapWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 maplibregl.setWorkerUrl(mapWorkerUrl);
@@ -151,26 +154,31 @@ export default function Map({
           "circle-stroke-width": 1,
         },
       });
+      m.on("mouseenter", "hotspots", () => { m.getCanvas().style.cursor = "pointer"; });
+      m.on("mouseleave", "hotspots", () => { m.getCanvas().style.cursor = ""; });
       m.on("click", "hotspots", (e) => {
         const p = e.features?.[0]?.properties;
         if (p) {
           const content = document.createElement("div");
-          const title = document.createElement("strong");
-          title.textContent = `Observed ${String(p.sensor).toUpperCase()} detection`;
-          content.append(title);
-          for (const line of [
-            p.satellite ? `NASA FIRMS · ${p.satellite}` : "NASA FIRMS · selected regional query",
-            p.date ? `${p.date} ${p.time || ""} UTC` : "Raw returned point location",
-            p.frp != null ? `FRP: ${p.frp} MW` : null,
-            p.sensor_confidence != null ? `Native sensor confidence: ${p.sensor_confidence}` : null,
-          ].filter(Boolean)) {
-            content.append(document.createElement("br"));
-            content.append(document.createTextNode(String(line ?? "")));
-          }
-          new maplibregl.Popup()
+          const root = createRoot(content);
+          flushSync(()=>root.render(<HotspotPopup point={p}/>));
+          const compactPopup=m.getCanvas().clientHeight<480;
+          const popup = new maplibregl.Popup({className:compactPopup?'hotspot-popup hotspot-popup-compact':'hotspot-popup',maxWidth:'310px',anchor:compactPopup?'center':undefined,offset:compactPopup?0:10})
             .setLngLat(e.lngLat)
             .setDOMContent(content)
             .addTo(m);
+          popup.on('close',()=>queueMicrotask(()=>root.unmount()));
+          // Keep the complete card inside shorter maps, including mobile layouts.
+          requestAnimationFrame(()=>{
+            const popupElement=popup.getElement();
+            const mapElement=m.getCanvas();
+            const card=popupElement.querySelector<HTMLElement>('.maplibregl-popup-content');
+            if(card){card.style.maxHeight=`${Math.max(180,mapElement.clientHeight-28)}px`;card.style.overflowY='auto';}
+            const box=popupElement.getBoundingClientRect(),viewport=mapElement.getBoundingClientRect();
+            const dx=Math.max(0,box.right-viewport.right+12)-Math.max(0,viewport.left+12-box.left);
+            const dy=Math.max(0,box.bottom-viewport.bottom+12)-Math.max(0,viewport.top+12-box.top);
+            if(!compactPopup&&(dx||dy))m.panBy([dx,dy],{duration:window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:180});
+          });
         }
       });
       m.addSource("selection", { type: "geojson", data: { type: "FeatureCollection", features: [] } });

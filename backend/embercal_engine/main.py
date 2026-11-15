@@ -25,7 +25,7 @@ app = APIRouter(prefix="/api/analysis", tags=["Australia analysis"])
 _wcache: LRUCache = LRUCache(maxsize=256)
 UNIT = "VIIRS S-NPP-equivalent hotspots"
 SERIES_INFO = {
- "modis_harmonized": {"label":"Harmonized", "unit":UNIT, "description":"Model predictions from MODIS throughout the record, including the overlap years. Production predictions are not independent validation."},
+ "modis_harmonized": {"label":"Harmonized", "unit":UNIT, "description":"Calibrated MODIS history, continuing with the VIIRS reference after the final supplied MODIS month. Both use S-NPP-equivalent units; sensors are never added or averaged. Production predictions are not independent validation."},
  "modis_raw": {"label":"MODIS", "unit":"Quality-filtered MODIS detections", "description":"Terra/Aqua native counts aggregated to the analysis grid."},
  "viirs_raw": {"label":"VIIRS reference", "unit":UNIT, "description":"Measured S-NPP, with NOAA-20/21 scaled to S-NPP units where the reference is unavailable. This is not always raw VIIRS."},
 }
@@ -53,8 +53,8 @@ def weights_for(aoi: AOI):
 def baseline(q: Query) -> tuple[int, int]:
     b0 = q.baseline_start if q.baseline_start is not None else settings.baseline_start
     b1 = q.baseline_end if q.baseline_end is not None else settings.baseline_end
-    if not 2000 <= b0 <= b1 <= 2100:
-        raise HTTPException(422, "Baseline must be ordered years between 2000 and 2100")
+    if not 2000 <= b0 <= b1 <= date.today().year:
+        raise HTTPException(422, f"Baseline must be ordered years between 2000 and {date.today().year}")
     return b0, b1
 
 
@@ -72,9 +72,11 @@ def meta():
         "unit": UNIT,
         "series": SERIES_INFO,
         "method_version":s.harm_report.get("method_version"),
+        "continuity":getattr(s,"continuity",None),
         "coverage_note":"Partition date availability is not cloud-free satellite viewing coverage.",
         "regions": s.regions,
         "record_start": "2000-11",
+        "baseline_limits": {"min":2000,"max":date.today().year},
         "latest_month": "%d-%02d" % s.latest,
         "latest_complete_month": "%d-%02d" % s.latest_complete,
         "default_baseline": [settings.baseline_start, settings.baseline_end],
@@ -114,7 +116,7 @@ def calendar(q: Query):
         raise HTTPException(422, "start must be before end")
     res = an.calendar(s, monthly, q.series, start, end, b0, b1)
     return {"aoi": summary, "unit": SERIES_INFO[q.series]["unit"], "series_info":SERIES_INFO[q.series], "observation_coverage":"unknown",
-            "series": q.series, "baseline": [b0, b1], **res, "method_version": s.harm_report.get("method_version")}
+            "series": q.series, "continuity":getattr(s,"continuity",None), "baseline": [b0, b1], **res, "method_version": s.harm_report.get("method_version")}
 
 
 @app.post("/forecast")
@@ -139,12 +141,12 @@ def compare(q: Query):
     start, end = an.ym_int(q.start, (2000, 11)), an.ym_int(q.end, s.latest)
     m = monthly.filter((pl.col("year") * 100 + pl.col("month")).is_between(start, end) & (pl.col("coverage") > 0))
     rows = [{"year": r["year"], "month": r["month"], "modis_raw": an._r(r["modis_raw"]), "viirs_raw": an._r(r["viirs_raw"]),
-             "modis_harmonized": an._r(r["modis_harmonized"]), "method": "modis_model_terra_only" if (r["year"],r["month"]) < (2002,7) else "modis_model"}
+             "modis_harmonized": an._r(r["modis_harmonized"]), "method": r.get("harmonization_method", "modis_model_terra_only" if (r["year"],r["month"]) < (2002,7) else "modis_model")}
             for r in m.iter_rows(named=True)]
     ann = m.filter(pl.col("coverage") >= 0.999).group_by("year").agg(
         pl.col("modis_raw").sum(), pl.col("viirs_raw").sum(),
         pl.col("modis_harmonized").sum(), n=pl.len()).filter(pl.col("n") == 12).sort("year")
-    overlap = m.filter(pl.col("viirs_raw").is_not_null() & (pl.col("coverage") >= 0.999))
+    overlap = m.filter(pl.col("viirs_raw").is_not_null() & pl.col("modis_raw").is_not_null() & (pl.col("coverage") >= 0.999))
     ov = {}
     if overlap.height >= 12:
         v, h = overlap["viirs_raw"].to_numpy(), overlap["modis_harmonized"].to_numpy()
@@ -299,10 +301,10 @@ def export_hotspots(q: HotspotQuery):
 def export_calendar(q: Query):
     res = calendar(q)
     cols = ["year", "month", "value", "lo", "hi", "projected", "coverage", "partial", "method", "sensor", "value_kind", "observation_coverage", "baseline_n_years", "baseline_first_year", "baseline_last_year", "uncertainty_note",
-            "percent_of_median", "percentile", "z_robust", "label", "climatology_median"]
+            "percent_of_median", "percentile", "z_robust", "label", "climatology_median", "uncertainty_status", "nominal_interval_coverage", "interval_validated_for_selection", "baseline_status"]
     med = {c["month"]: c.get("median") for c in res["climatology"]}
     export_meta={"area_name":res["aoi"]["name"],"area_selection":__import__('json').dumps(res["aoi"]["selection"]),
-                 "series":q.series,"unit":res["unit"],"method_version":res.get("method_version"),"baseline_start":res["baseline"][0],"baseline_end":res["baseline"][1]}
+                 "series":q.series,"unit":res["unit"],"method_version":res.get("method_version"),"source_policy":(res.get("continuity") or {}).get("source_policy"),"baseline_start":res["baseline"][0],"baseline_end":res["baseline"][1]}
     cols += list(export_meta)
     rows = ([export_meta[c] if c in export_meta else med.get(m["month"]) if c == "climatology_median" else m.get(c) for c in cols] for m in res["months"])
     return StreamingResponse(_csv_stream(cols, rows), media_type="text/csv",

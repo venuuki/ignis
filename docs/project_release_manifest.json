@@ -1,0 +1,29 @@
+{
+  "release": "Australia research prototype 2026-11-15",
+  "checks": {
+    "backend_tests": 82,
+    "frontend_tests": 9,
+    "production_frontend_build": "passed",
+    "real_archive_api_smoke": "passed"
+  },
+  "production_model_replaced": false,
+  "new_external_data": false,
+  "user_evaluation": "pending actual sessions",
+  "prospective_validation": "pending new observations",
+  "sha256": {
+    "backend/embercal_engine/analytics.py": "c5c2d5abca4beb1cb0401235927cf88a3f37e244033a73b25abe93cc47e0e213",
+    "backend/embercal_engine/main.py": "67708c28fb01def5e5a3f0dac0be8496d55da761d7faaf1f3e631e47edfb5efd",
+    "backend/embercal_engine/data.py": "7b25afe3a870ff4855e1522ac25f82b53b4b8aa17a59205a9e85d1348bc954c9",
+    "pipeline/common.py": "e19a6d553d085e3ee816666bf4b5d3f99847884e17456cd84b4f8dd6ff7d3399",
+    "pipeline/harmonize.py": "892b2f78ad37bf819f08e2748384bd5ffb5bda304543e06f00857b27339e3d39",
+    "pipeline/harmonize_v3.py": "361669397ab01b6c100ffd80fdb8f836c164cd3b8e656702c3e58eac334007ab",
+    "pipeline/source_support.py": "4bcc43198ea1dc88bd3f66090e6f344e3fcbf64725fb0c398d50c79d7206867d",
+    "pipeline/calibration_experiment.py": "df1a72b76cf928f0bbb597b3bad5d55813a29f91231816593466a45b35646008",
+    "pipeline/calibration_gate.py": "170c01c0a57cc51f9b895a87672a88458fc766fd517d728253e0ed4a2ad932f6",
+    "pipeline/regional_validation.py": "d09d575c3fb93a834d2d159cdbf2297b1451db0dac74c50ea74891f56e5dcd8a",
+    "frontend/web/src/Analysis.tsx": "c3ef1eb7257e4130f2451425c4099cfacc5c2062dc98be688406589f7a5ae4a8",
+    "docs/EmberCal_Calibration_and_Data_Methods.docx": "d8f8f7402bdc3ff5800051dbebdad99ca27cdff7204542f51e58006c72dc9e7f",
+    "data/processed/harmonization_report.json": "48922730c82118d0b394045764ae6a8e3c5af2659120902e9b72d25f008432fc",
+    "data/processed/validation_cells.parquet": "336309c2bc42a8dc19e2371246f7c1e21d9931db21827db6403e8e126909fb1d"
+  }
+}

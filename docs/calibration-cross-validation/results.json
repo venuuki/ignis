@@ -1,0 +1,573 @@
+{
+  "protocol": {
+    "years": [
+      2013,
+      2016,
+      2018,
+      2023
+    ],
+    "candidates": [
+      [
+        "global",
+        500.0
+      ],
+      [
+        "season",
+        500.0
+      ],
+      [
+        "season",
+        5000.0
+      ],
+      [
+        "tile",
+        500.0
+      ],
+      [
+        "tile",
+        5000.0
+      ],
+      [
+        "tile_quarter",
+        500.0
+      ],
+      [
+        "tile_quarter",
+        5000.0
+      ],
+      [
+        "tile_month",
+        500.0
+      ],
+      [
+        "tile_month",
+        5000.0
+      ]
+    ],
+    "folds": "Leave one training year out; retrospective, not chronological forecasting.",
+    "safeguard": "At least 3 of 4 fold objective wins, >=1% relative mean-objective improvement, and no fixed-area mean WAPE degradation >1 percentage point.",
+    "evaluation_policy": "No 2019-2021 or 2024-2025 evaluation metrics read or recomputed; no production replacement.",
+    "interval_policy": "Existing candidate intervals apply only to four fixed areas; arbitrary-area validation is still required."
+  },
+  "folds": {
+    "2013": {
+      "global": {
+        "objective": 20.54631750933446,
+        "area_wape": {
+          "australia": 7.791130842549018,
+          "north": 8.19343950329513,
+          "southeast": 25.386570516500168,
+          "southwest": 24.264782316248155
+        },
+        "pooled_half_degree_wape": 34.56622424010656
+      },
+      "season_500": {
+        "objective": 20.028607358030914,
+        "area_wape": {
+          "australia": 7.718693395450165,
+          "north": 5.352304633033283,
+          "southeast": 24.401485472066355,
+          "southwest": 23.208800392248172
+        },
+        "pooled_half_degree_wape": 34.712931846193314
+      },
+      "season_5000": {
+        "objective": 19.769286327737262,
+        "area_wape": {
+          "australia": 7.49917968224628,
+          "north": 5.3039172674895445,
+          "southeast": 25.01226057361838,
+          "southwest": 22.441216646632697
+        },
+        "pooled_half_degree_wape": 34.222881138385304
+      },
+      "tile_500": {
+        "objective": 20.537715237257416,
+        "area_wape": {
+          "australia": 7.542366695916211,
+          "north": 6.464453615569751,
+          "southeast": 32.536630270155236,
+          "southwest": 23.350426307669412
+        },
+        "pooled_half_degree_wape": 33.28694228472456
+      },
+      "tile_5000": {
+        "objective": 20.071787234824907,
+        "area_wape": {
+          "australia": 7.219845135162917,
+          "north": 6.434865662423474,
+          "southeast": 31.037408254486866,
+          "southwest": 23.241654901549435
+        },
+        "pooled_half_degree_wape": 32.75754029649188
+      },
+      "tile_quarter_500": {
+        "objective": 19.10370440845459,
+        "area_wape": {
+          "australia": 7.667416757259516,
+          "north": 7.2622488801489125,
+          "southeast": 26.732977372400565,
+          "southwest": 18.376082268861055
+        },
+        "pooled_half_degree_wape": 32.186593627634075
+      },
+      "tile_quarter_5000": {
+        "objective": 19.521015891337836,
+        "area_wape": {
+          "australia": 6.985381562211458,
+          "north": 6.332927800869023,
+          "southeast": 28.60381639440894,
+          "southwest": 22.764066059329497
+        },
+        "pooled_half_degree_wape": 32.344062693599554
+      },
+      "tile_month_500": {
+        "objective": 18.712346430363393,
+        "area_wape": {
+          "australia": 7.144112068774409,
+          "north": 4.3024880379869055,
+          "southeast": 27.616806977880582,
+          "southwest": 20.020870132419436
+        },
+        "pooled_half_degree_wape": 31.679538839553455
+      },
+      "tile_month_5000": {
+        "objective": 19.388513314055675,
+        "area_wape": {
+          "australia": 6.985601658386899,
+          "north": 4.337480357966759,
+          "southeast": 28.13598415237279,
+          "southwest": 23.525586185216813
+        },
+        "pooled_half_degree_wape": 32.51358805192801
+      }
+    },
+    "2016": {
+      "global": {
+        "objective": 20.23647687157108,
+        "area_wape": {
+          "australia": 8.267433591706325,
+          "north": 12.6358638530074,
+          "southeast": 12.252803131044004,
+          "southwest": 27.763882062221146
+        },
+        "pooled_half_degree_wape": 34.89114734091606
+      },
+      "season_500": {
+        "objective": 18.464554926562094,
+        "area_wape": {
+          "australia": 6.269842411173427,
+          "north": 4.693979948562202,
+          "southeast": 11.556263343927583,
+          "southwest": 25.109652378079545
+        },
+        "pooled_half_degree_wape": 35.33719047832308
+      },
+      "season_5000": {
+        "objective": 18.579621271787193,
+        "area_wape": {
+          "australia": 6.38062962416727,
+          "north": 6.545268683067705,
+          "southeast": 11.63098060036793,
+          "southwest": 26.313886741192746
+        },
+        "pooled_half_degree_wape": 34.528188849651514
+      },
+      "tile_500": {
+        "objective": 20.489504173777487,
+        "area_wape": {
+          "australia": 8.7926283673769,
+          "north": 9.624280043211472,
+          "southeast": 18.173903531788795,
+          "southwest": 28.36077527241765
+        },
+        "pooled_half_degree_wape": 33.956231204816255
+      },
+      "tile_5000": {
+        "objective": 20.11595523743121,
+        "area_wape": {
+          "australia": 8.384230411071936,
+          "north": 9.710430500678953,
+          "southeast": 18.223887624250047,
+          "southwest": 27.423362448611634
+        },
+        "pooled_half_degree_wape": 33.51107511004148
+      },
+      "tile_quarter_500": {
+        "objective": 17.26175607309261,
+        "area_wape": {
+          "australia": 5.461133452915962,
+          "north": 8.082462166325382,
+          "southeast": 15.224742330792884,
+          "southwest": 19.588604901258865
+        },
+        "pooled_half_degree_wape": 32.02553163356949
+      },
+      "tile_quarter_5000": {
+        "objective": 18.387240652580154,
+        "area_wape": {
+          "australia": 5.788911601082741,
+          "north": 7.599488627316637,
+          "southeast": 17.921453375224004,
+          "southwest": 26.34242373119893
+        },
+        "pooled_half_degree_wape": 32.08502177874453
+      },
+      "tile_month_500": {
+        "objective": 16.876632964887648,
+        "area_wape": {
+          "australia": 4.183465613750873,
+          "north": 4.6523940065119636,
+          "southeast": 16.00664841821451,
+          "southwest": 23.076017238282954
+        },
+        "pooled_half_degree_wape": 31.86808005990893
+      },
+      "tile_month_5000": {
+        "objective": 18.305515619088606,
+        "area_wape": {
+          "australia": 5.828400592426583,
+          "north": 6.655899771457132,
+          "southeast": 15.970504785410446,
+          "southwest": 27.214985532685343
+        },
+        "pooled_half_degree_wape": 32.4743495683216
+      }
+    },
+    "2018": {
+      "global": {
+        "objective": 20.152431151122325,
+        "area_wape": {
+          "australia": 10.760764803577144,
+          "north": 13.218550777399631,
+          "southeast": 14.612247827754517,
+          "southwest": 23.166816964002095
+        },
+        "pooled_half_degree_wape": 32.69732346007108
+      },
+      "season_500": {
+        "objective": 16.13278299090273,
+        "area_wape": {
+          "australia": 5.211232918883841,
+          "north": 6.47366587624117,
+          "southeast": 11.037832734521391,
+          "southwest": 15.930508158585317
+        },
+        "pooled_half_degree_wape": 32.03978046404172
+      },
+      "season_5000": {
+        "objective": 17.076328292102655,
+        "area_wape": {
+          "australia": 5.821250889375598,
+          "north": 9.600993179129414,
+          "southeast": 11.957696354771443,
+          "southwest": 19.659969823315084
+        },
+        "pooled_half_degree_wape": 31.66818086786039
+      },
+      "tile_500": {
+        "objective": 18.33729278565532,
+        "area_wape": {
+          "australia": 9.062570406408884,
+          "north": 12.81412025237202,
+          "southeast": 17.46319385783746,
+          "southwest": 16.922672131078762
+        },
+        "pooled_half_degree_wape": 30.215979203460993
+      },
+      "tile_5000": {
+        "objective": 18.88505004874946,
+        "area_wape": {
+          "australia": 8.777705799806224,
+          "north": 12.783290223466562,
+          "southeast": 18.894868497075763,
+          "southwest": 21.073476017647266
+        },
+        "pooled_half_degree_wape": 30.29356610037896
+      },
+      "tile_quarter_500": {
+        "objective": 15.161055785481167,
+        "area_wape": {
+          "australia": 5.46536554140044,
+          "north": 6.019183110800858,
+          "southeast": 12.993800237388266,
+          "southwest": 15.889587937202782
+        },
+        "pooled_half_degree_wape": 28.383611386579094
+      },
+      "tile_quarter_5000": {
+        "objective": 17.21535019279806,
+        "area_wape": {
+          "australia": 6.090418780890821,
+          "north": 8.252250517760832,
+          "southeast": 19.670425577123847,
+          "southwest": 22.14463247392103
+        },
+        "pooled_half_degree_wape": 28.866528941234787
+      },
+      "tile_month_500": {
+        "objective": 15.820893802971554,
+        "area_wape": {
+          "australia": 5.448994409326688,
+          "north": 4.127904193699159,
+          "southeast": 17.074279388826447,
+          "southwest": 19.51815453868278
+        },
+        "pooled_half_degree_wape": 28.44024095918518
+      },
+      "tile_month_5000": {
+        "objective": 17.807777666924665,
+        "area_wape": {
+          "australia": 6.707404048447454,
+          "north": 8.474207289719962,
+          "southeast": 19.082798794054757,
+          "southwest": 22.949937109278114
+        },
+        "pooled_half_degree_wape": 29.88028122130893
+      }
+    },
+    "2023": {
+      "global": {
+        "objective": 21.094994359825332,
+        "area_wape": {
+          "australia": 17.074485703485113,
+          "north": 14.31805515903851,
+          "southeast": 6.6425052467024885,
+          "southwest": 13.359688549424586
+        },
+        "pooled_half_degree_wape": 34.77041439093569
+      },
+      "season_500": {
+        "objective": 16.18342725564573,
+        "area_wape": {
+          "australia": 8.590211481368307,
+          "north": 8.286919753151208,
+          "southeast": 5.863733652287202,
+          "southwest": 12.359602949333595
+        },
+        "pooled_half_degree_wape": 31.123318167311538
+      },
+      "season_5000": {
+        "objective": 17.112889002410363,
+        "area_wape": {
+          "australia": 10.290859871410332,
+          "north": 9.89999333332893,
+          "southeast": 5.893324351778623,
+          "southwest": 12.835240574073028
+        },
+        "pooled_half_degree_wape": 31.504954382760562
+      },
+      "tile_500": {
+        "objective": 21.513306944107573,
+        "area_wape": {
+          "australia": 13.97884706479276,
+          "north": 14.135157488821315,
+          "southeast": 17.426063868124892,
+          "southwest": 23.46982132116472
+        },
+        "pooled_half_degree_wape": 32.217392874826324
+      },
+      "tile_5000": {
+        "objective": 20.78899038682629,
+        "area_wape": {
+          "australia": 14.858063808281843,
+          "north": 14.025068403482107,
+          "southeast": 15.302599527229512,
+          "southwest": 16.363056167733085
+        },
+        "pooled_half_degree_wape": 32.27866598604879
+      },
+      "tile_quarter_500": {
+        "objective": 15.835613938606278,
+        "area_wape": {
+          "australia": 6.468962590012764,
+          "north": 6.487926771861688,
+          "southeast": 13.667449781088822,
+          "southwest": 19.479629206996776
+        },
+        "pooled_half_degree_wape": 27.826210639156972
+      },
+      "tile_quarter_5000": {
+        "objective": 17.44495796829747,
+        "area_wape": {
+          "australia": 10.396262759968844,
+          "north": 8.537790446625896,
+          "southeast": 15.467476563579206,
+          "southwest": 14.258044273166071
+        },
+        "pooled_half_degree_wape": 29.1841740504665
+      },
+      "tile_month_500": {
+        "objective": 16.452340158446052,
+        "area_wape": {
+          "australia": 8.25253275560258,
+          "north": 7.778955883688988,
+          "southeast": 16.173140154088326,
+          "southwest": 15.804107835538952
+        },
+        "pooled_half_degree_wape": 27.85241976196349
+      },
+      "tile_month_5000": {
+        "objective": 18.75533573763218,
+        "area_wape": {
+          "australia": 12.623798515531359,
+          "north": 10.484097668289666,
+          "southeast": 13.984693433249946,
+          "southwest": 14.059350768487135
+        },
+        "pooled_half_degree_wape": 30.7994947406896
+      }
+    }
+  },
+  "summaries": {
+    "global": {
+      "mean_objective": 20.5075549729633,
+      "fold_wins": 0,
+      "mean_area_wape": {
+        "australia": 10.9734537353294,
+        "north": 12.091477323185167,
+        "southeast": 14.723531680500296,
+        "southwest": 22.138792472973996
+      },
+      "gate": {
+        "eligible": false,
+        "reasons": [
+          "Fewer than three of four held-training-year objective wins",
+          "Less than 1% relative mean-objective improvement"
+        ]
+      }
+    },
+    "season_500": {
+      "mean_objective": 17.702343132785366,
+      "fold_wins": 4,
+      "mean_area_wape": {
+        "australia": 6.947495051718935,
+        "north": 6.201717552746965,
+        "southeast": 13.214828800700632,
+        "southwest": 19.152140969561657
+      },
+      "gate": {
+        "eligible": true,
+        "reasons": []
+      }
+    },
+    "season_5000": {
+      "mean_objective": 18.13453122350937,
+      "fold_wins": 4,
+      "mean_area_wape": {
+        "australia": 7.49798001679987,
+        "north": 7.837543115753898,
+        "southeast": 13.623565470134094,
+        "southwest": 20.312578446303387
+      },
+      "gate": {
+        "eligible": true,
+        "reasons": []
+      }
+    },
+    "tile_500": {
+      "mean_objective": 20.21945478519945,
+      "fold_wins": 2,
+      "mean_area_wape": {
+        "australia": 9.844103133623689,
+        "north": 10.75950284999364,
+        "southeast": 21.399947881976594,
+        "southwest": 23.025923758082634
+      },
+      "gate": {
+        "eligible": false,
+        "reasons": [
+          "Fewer than three of four held-training-year objective wins",
+          "Regional error guardrail: southeast"
+        ]
+      }
+    },
+    "tile_5000": {
+      "mean_objective": 19.965445726957967,
+      "fold_wins": 4,
+      "mean_area_wape": {
+        "australia": 9.80996128858073,
+        "north": 10.738413697512774,
+        "southeast": 20.86469097576055,
+        "southwest": 22.025387383885352
+      },
+      "gate": {
+        "eligible": false,
+        "reasons": [
+          "Regional error guardrail: southeast"
+        ]
+      }
+    },
+    "tile_quarter_500": {
+      "mean_objective": 16.84053255140866,
+      "fold_wins": 4,
+      "mean_area_wape": {
+        "australia": 6.2657195853971706,
+        "north": 6.9629552322842105,
+        "southeast": 17.154742430417635,
+        "southwest": 18.33347607857987
+      },
+      "gate": {
+        "eligible": false,
+        "reasons": [
+          "Regional error guardrail: southeast"
+        ]
+      }
+    },
+    "tile_quarter_5000": {
+      "mean_objective": 18.14214117625338,
+      "fold_wins": 4,
+      "mean_area_wape": {
+        "australia": 7.315243676038467,
+        "north": 7.680614348143097,
+        "southeast": 20.415792977584,
+        "southwest": 21.377291634403882
+      },
+      "gate": {
+        "eligible": false,
+        "reasons": [
+          "Regional error guardrail: southeast"
+        ]
+      }
+    },
+    "tile_month_500": {
+      "mean_objective": 16.965553339167162,
+      "fold_wins": 4,
+      "mean_area_wape": {
+        "australia": 6.257276211863638,
+        "north": 5.215435530471754,
+        "southeast": 19.217718734752467,
+        "southwest": 19.60478743623103
+      },
+      "gate": {
+        "eligible": false,
+        "reasons": [
+          "Regional error guardrail: southeast"
+        ]
+      }
+    },
+    "tile_month_5000": {
+      "mean_objective": 18.56428558442528,
+      "fold_wins": 4,
+      "mean_area_wape": {
+        "australia": 8.036301203698073,
+        "north": 7.487921271858379,
+        "southeast": 19.293495291271984,
+        "southwest": 21.93746489891685
+      },
+      "gate": {
+        "eligible": false,
+        "reasons": [
+          "Regional error guardrail: southeast"
+        ]
+      }
+    }
+  },
+  "recommended_for_further_evaluation": "season_500",
+  "production_replacement_approved": false,
+  "blocking_evidence": [
+    "No completely unused full evaluation year in supplied archive.",
+    "Arbitrary-area interval coverage has not been established.",
+    "Intended-user testing has not yet been conducted."
+  ]
+}

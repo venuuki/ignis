@@ -1,0 +1,460 @@
+{
+  "generated_at": "2026-11-15T16:15:27.939985+00:00",
+  "evaluation_type": "frozen_temporal_holdout_geographic_subsets",
+  "years": [
+    2019,
+    2020,
+    2021
+  ],
+  "source_model_version": "harm-v3.1-calibrated-only",
+  "source_built_at": "2026-11-15T12:58:37.150500+00:00",
+  "validation_sha256": "336309c2bc42a8dc19e2371246f7c1e21d9931db21827db6403e8e126909fb1d",
+  "region_selection": "Fixed rectangles chosen before scoring; not biome masks or spatial holdouts.",
+  "anomaly_policy": "Exploratory leave-one-year-out reference median, +/-20% band, 2 peer years; zero baseline excluded.",
+  "transition_policy": "Every consecutive held-out month pair; calibrated MODIS before boundary, reference after. Excess jump = switched change minus reference-only change. This exposes residual calibration error, not prospective operational accuracy.",
+  "regions": [
+    {
+      "months": 36,
+      "raw_modis": {
+        "monthly_mae": 64005.694444444445,
+        "wape_pct": 79.42754518677084,
+        "bias_pct": -79.42754518677084
+      },
+      "harmonized": {
+        "monthly_mae": 8194.56110019154,
+        "wape_pct": 10.168999457324261,
+        "bias_pct": -4.373297463422834
+      },
+      "wape_reduction_percentage_points": 69.25854572944658,
+      "interval_coverage_80_pct": 72.22222222222221,
+      "seasonal_profile_spearman": {
+        "harmonized": 0.9930069930069931,
+        "modis": 0.9930069930069931
+      },
+      "annual_peaks": [
+        {
+          "year": 2019,
+          "reference_peak": 12,
+          "harmonized_peak": 12,
+          "modis_peak": 12,
+          "harmonized_peak_distance_months": 0,
+          "modis_peak_distance_months": 0
+        },
+        {
+          "year": 2020,
+          "reference_peak": 1,
+          "harmonized_peak": 1,
+          "modis_peak": 1,
+          "harmonized_peak_distance_months": 0,
+          "modis_peak_distance_months": 0
+        },
+        {
+          "year": 2021,
+          "reference_peak": 10,
+          "harmonized_peak": 10,
+          "modis_peak": 10,
+          "harmonized_peak_distance_months": 0,
+          "modis_peak_distance_months": 0
+        }
+      ],
+      "annual_metrics": [
+        {
+          "year": 2019,
+          "harmonized": {
+            "monthly_mae": 10200.910988966623,
+            "wape_pct": 8.588932904084043,
+            "bias_pct": -0.29197493083659276
+          },
+          "modis": {
+            "monthly_mae": 94602.41666666667,
+            "wape_pct": 79.65306335807108,
+            "bias_pct": -79.65306335807108
+          }
+        },
+        {
+          "year": 2020,
+          "harmonized": {
+            "monthly_mae": 9021.440193573633,
+            "wape_pct": 14.344203585595494,
+            "bias_pct": -11.896882778677579
+          },
+          "modis": {
+            "monthly_mae": 50846.25,
+            "wape_pct": 80.84617820596229,
+            "bias_pct": -80.84617820596229
+          }
+        },
+        {
+          "year": 2021,
+          "harmonized": {
+            "monthly_mae": 5361.332118034363,
+            "wape_pct": 8.922083662084097,
+            "bias_pct": -4.565559505400767
+          },
+          "modis": {
+            "monthly_mae": 46568.416666666664,
+            "wape_pct": 77.49702879125543,
+            "bias_pct": -77.49702879125543
+          }
+        }
+      ],
+      "exploratory_anomaly_agreement": {
+        "harmonized": {
+          "n_months": 36,
+          "agreement_pct": 86.11111111111111
+        },
+        "modis": {
+          "n_months": 36,
+          "agreement_pct": 44.44444444444444
+        }
+      },
+      "transitions": {
+        "n": 35,
+        "mean_excess_jump": 3743.6540363584245,
+        "mean_abs_excess_jump": 8309.894964081901,
+        "mean_abs_excess_pct_typical_month": 10.312122436697102,
+        "max_abs_excess_pct_typical_month": 37.950117068690346
+      },
+      "id": "australia",
+      "name": "Australia",
+      "bbox": null,
+      "effective_cells": 57947.0
+    },
+    {
+      "months": 36,
+      "raw_modis": {
+        "monthly_mae": 13803.555555554696,
+        "wape_pct": 78.36918020583958,
+        "bias_pct": -78.3688647912113
+      },
+      "harmonized": {
+        "monthly_mae": 2383.5985445444953,
+        "wape_pct": 13.532793280975635,
+        "bias_pct": -11.046251858409418
+      },
+      "wape_reduction_percentage_points": 64.83638692486394,
+      "interval_coverage_80_pct": 86.11111111111111,
+      "seasonal_profile_spearman": {
+        "harmonized": 0.9860139860139862,
+        "modis": 1.0
+      },
+      "annual_peaks": [
+        {
+          "year": 2019,
+          "reference_peak": 7,
+          "harmonized_peak": 10,
+          "modis_peak": 7,
+          "harmonized_peak_distance_months": 3,
+          "modis_peak_distance_months": 0
+        },
+        {
+          "year": 2020,
+          "reference_peak": 7,
+          "harmonized_peak": 7,
+          "modis_peak": 7,
+          "harmonized_peak_distance_months": 0,
+          "modis_peak_distance_months": 0
+        },
+        {
+          "year": 2021,
+          "reference_peak": 5,
+          "harmonized_peak": 5,
+          "modis_peak": 5,
+          "harmonized_peak_distance_months": 0,
+          "modis_peak_distance_months": 0
+        }
+      ],
+      "annual_metrics": [
+        {
+          "year": 2019,
+          "harmonized": {
+            "monthly_mae": 2448.3823379674045,
+            "wape_pct": 11.303617260413011,
+            "bias_pct": -7.939407192755628
+          },
+          "modis": {
+            "monthly_mae": 16950.833333332263,
+            "wape_pct": 78.25809281245913,
+            "bias_pct": -78.25809281245913
+          }
+        },
+        {
+          "year": 2020,
+          "harmonized": {
+            "monthly_mae": 2530.638862212338,
+            "wape_pct": 20.11316851225954,
+            "bias_pct": -20.11316851225954
+          },
+          "modis": {
+            "monthly_mae": 9998.833333332715,
+            "wape_pct": 79.46934774545649,
+            "bias_pct": -79.46934774545649
+          }
+        },
+        {
+          "year": 2021,
+          "harmonized": {
+            "monthly_mae": 2171.774433453743,
+            "wape_pct": 11.677252980305813,
+            "bias_pct": -8.530694618160096
+          },
+          "modis": {
+            "monthly_mae": 14460.999999999112,
+            "wape_pct": 77.7542790572632,
+            "bias_pct": -77.75338291961646
+          }
+        }
+      ],
+      "exploratory_anomaly_agreement": {
+        "harmonized": {
+          "n_months": 36,
+          "agreement_pct": 94.44444444444444
+        },
+        "modis": {
+          "n_months": 36,
+          "agreement_pct": 47.22222222222222
+        }
+      },
+      "transitions": {
+        "n": 35,
+        "mean_excess_jump": 2015.8115895678698,
+        "mean_abs_excess_jump": 2437.1108150753134,
+        "mean_abs_excess_pct_typical_month": 13.836607233516705,
+        "max_abs_excess_pct_typical_month": 66.37498276407031
+      },
+      "id": "north",
+      "name": "Northern Australia sample",
+      "bbox": [
+        129.0,
+        -17.0,
+        137.0,
+        -12.0
+      ],
+      "effective_cells": 3461.0
+    },
+    {
+      "months": 36,
+      "raw_modis": {
+        "monthly_mae": 8573.472222221813,
+        "wape_pct": 81.34781531519657,
+        "bias_pct": -81.34781531519657
+      },
+      "harmonized": {
+        "monthly_mae": 1227.0073274505926,
+        "wape_pct": 11.642233493815047,
+        "bias_pct": 3.6231966547577716
+      },
+      "wape_reduction_percentage_points": 69.70558182138153,
+      "interval_coverage_80_pct": 97.22222222222221,
+      "seasonal_profile_spearman": {
+        "harmonized": 0.9440559440559443,
+        "modis": 0.9580419580419581
+      },
+      "annual_peaks": [
+        {
+          "year": 2019,
+          "reference_peak": 12,
+          "harmonized_peak": 12,
+          "modis_peak": 12,
+          "harmonized_peak_distance_months": 0,
+          "modis_peak_distance_months": 0
+        },
+        {
+          "year": 2020,
+          "reference_peak": 1,
+          "harmonized_peak": 1,
+          "modis_peak": 1,
+          "harmonized_peak_distance_months": 0,
+          "modis_peak_distance_months": 0
+        },
+        {
+          "year": 2021,
+          "reference_peak": 4,
+          "harmonized_peak": 4,
+          "modis_peak": 4,
+          "harmonized_peak_distance_months": 0,
+          "modis_peak_distance_months": 0
+        }
+      ],
+      "annual_metrics": [
+        {
+          "year": 2019,
+          "harmonized": {
+            "monthly_mae": 2140.3551747797987,
+            "wape_pct": 12.328702243738926,
+            "bias_pct": 0.9105918698459133
+          },
+          "modis": {
+            "monthly_mae": 14323.41666666595,
+            "wape_pct": 82.50459609559879,
+            "bias_pct": -82.50459609559879
+          }
+        },
+        {
+          "year": 2020,
+          "harmonized": {
+            "monthly_mae": 1256.6864787736972,
+            "wape_pct": 10.344872402870884,
+            "bias_pct": 7.446539246715016
+          },
+          "modis": {
+            "monthly_mae": 9889.499999999563,
+            "wape_pct": 81.40902075115761,
+            "bias_pct": -81.40902075115761
+          }
+        },
+        {
+          "year": 2021,
+          "harmonized": {
+            "monthly_mae": 283.98032879828156,
+            "wape_pct": 13.464100930776501,
+            "bias_pct": 3.930050700326003
+          },
+          "modis": {
+            "monthly_mae": 1507.499999999932,
+            "wape_pct": 71.47372580007902,
+            "bias_pct": -71.47372580007902
+          }
+        }
+      ],
+      "exploratory_anomaly_agreement": {
+        "harmonized": {
+          "n_months": 36,
+          "agreement_pct": 94.44444444444444
+        },
+        "modis": {
+          "n_months": 36,
+          "agreement_pct": 69.44444444444444
+        }
+      },
+      "transitions": {
+        "n": 35,
+        "mean_excess_jump": -402.3531980241932,
+        "mean_abs_excess_jump": 1252.4804918016164,
+        "mean_abs_excess_pct_typical_month": 11.883930931610411,
+        "max_abs_excess_pct_typical_month": 130.84999568018617
+      },
+      "id": "southeast",
+      "name": "Southeastern Australia sample",
+      "bbox": [
+        146.0,
+        -38.0,
+        151.0,
+        -32.0
+      ],
+      "effective_cells": 2710.0
+    },
+    {
+      "months": 36,
+      "raw_modis": {
+        "monthly_mae": 1914.861111111019,
+        "wape_pct": 79.25385146010576,
+        "bias_pct": -79.25385146010576
+      },
+      "harmonized": {
+        "monthly_mae": 519.9290654923971,
+        "wape_pct": 21.51925311304575,
+        "bias_pct": -12.921249096243903
+      },
+      "wape_reduction_percentage_points": 57.734598347060015,
+      "interval_coverage_80_pct": 94.44444444444444,
+      "seasonal_profile_spearman": {
+        "harmonized": 0.9370629370629372,
+        "modis": 0.9300699300699302
+      },
+      "annual_peaks": [
+        {
+          "year": 2019,
+          "reference_peak": 4,
+          "harmonized_peak": 4,
+          "modis_peak": 4,
+          "harmonized_peak_distance_months": 0,
+          "modis_peak_distance_months": 0
+        },
+        {
+          "year": 2020,
+          "reference_peak": 5,
+          "harmonized_peak": 5,
+          "modis_peak": 5,
+          "harmonized_peak_distance_months": 0,
+          "modis_peak_distance_months": 0
+        },
+        {
+          "year": 2021,
+          "reference_peak": 4,
+          "harmonized_peak": 4,
+          "modis_peak": 4,
+          "harmonized_peak_distance_months": 0,
+          "modis_peak_distance_months": 0
+        }
+      ],
+      "annual_metrics": [
+        {
+          "year": 2019,
+          "harmonized": {
+            "monthly_mae": 534.3199296792109,
+            "wape_pct": 15.599443242952699,
+            "bias_pct": 0.25997405254862377
+          },
+          "modis": {
+            "monthly_mae": 2596.8333333332043,
+            "wape_pct": 75.81441743911637,
+            "bias_pct": -75.81441743911637
+          }
+        },
+        {
+          "year": 2020,
+          "harmonized": {
+            "monthly_mae": 602.4943439960274,
+            "wape_pct": 27.171002773319852,
+            "bias_pct": -26.174431849979275
+          },
+          "modis": {
+            "monthly_mae": 1837.666666666577,
+            "wape_pct": 82.87421549099926,
+            "bias_pct": -82.87421549099926
+          }
+        },
+        {
+          "year": 2021,
+          "harmonized": {
+            "monthly_mae": 422.9729228019532,
+            "wape_pct": 26.34251128100301,
+            "bias_pct": -22.737206911827936
+          },
+          "modis": {
+            "monthly_mae": 1310.083333333276,
+            "wape_pct": 81.5912393605979,
+            "bias_pct": -81.5912393605979
+          }
+        }
+      ],
+      "exploratory_anomaly_agreement": {
+        "harmonized": {
+          "n_months": 36,
+          "agreement_pct": 69.44444444444444
+        },
+        "modis": {
+          "n_months": 36,
+          "agreement_pct": 44.44444444444444
+        }
+      },
+      "transitions": {
+        "n": 35,
+        "mean_excess_jump": 313.8274732589565,
+        "mean_abs_excess_jump": 527.5001559393535,
+        "mean_abs_excess_pct_typical_month": 21.832611650744585,
+        "max_abs_excess_pct_typical_month": 113.19141883087046
+      },
+      "id": "southwest",
+      "name": "Southwestern Australia sample",
+      "bbox": [
+        115.0,
+        -35.0,
+        120.0,
+        -30.0
+      ],
+      "effective_cells": 2145.0
+    }
+  ]
+}

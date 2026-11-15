@@ -1,0 +1,50 @@
+{
+  "years": [
+    2013,
+    2016,
+    2018,
+    2023
+  ],
+  "candidates": [
+    [
+      "global",
+      500.0
+    ],
+    [
+      "season",
+      500.0
+    ],
+    [
+      "season",
+      5000.0
+    ],
+    [
+      "tile",
+      500.0
+    ],
+    [
+      "tile",
+      5000.0
+    ],
+    [
+      "tile_quarter",
+      500.0
+    ],
+    [
+      "tile_quarter",
+      5000.0
+    ],
+    [
+      "tile_month",
+      500.0
+    ],
+    [
+      "tile_month",
+      5000.0
+    ]
+  ],
+  "folds": "Leave one training year out; retrospective, not chronological forecasting.",
+  "safeguard": "At least 3 of 4 fold objective wins, >=1% relative mean-objective improvement, and no fixed-area mean WAPE degradation >1 percentage point.",
+  "evaluation_policy": "No 2019-2021 or 2024-2025 evaluation metrics read or recomputed; no production replacement.",
+  "interval_policy": "Existing candidate intervals apply only to four fixed areas; arbitrary-area validation is still required."
+}

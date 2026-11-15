@@ -1,0 +1,887 @@
+{
+  "selected": "tile_quarter_500",
+  "selection_scores": {
+    "global": {
+      "objective": 21.758334865668107,
+      "area_wape": {
+        "australia": 13.050414861041906,
+        "north": 16.057799118572422,
+        "southeast": 11.580742156436171,
+        "southwest": 19.368467058328218
+      },
+      "pooled_half_degree_wape": 36.55558695818348
+    },
+    "season_500": {
+      "objective": 18.555606204853934,
+      "area_wape": {
+        "australia": 6.72548101137255,
+        "north": 9.133060717725218,
+        "southeast": 12.226705827301686,
+        "southwest": 18.951288033274267
+      },
+      "pooled_half_degree_wape": 35.50431941042219
+    },
+    "season_5000": {
+      "objective": 18.674100345357008,
+      "area_wape": {
+        "australia": 6.891216100275988,
+        "north": 10.821135258453529,
+        "southeast": 11.757124490410833,
+        "southwest": 19.564057061992195
+      },
+      "pooled_half_degree_wape": 35.083645998842854
+    },
+    "tile_500": {
+      "objective": 20.69558254288518,
+      "area_wape": {
+        "australia": 10.314393151198491,
+        "north": 14.1442623080365,
+        "southeast": 17.765736030595104,
+        "southwest": 23.208777302431432
+      },
+      "pooled_half_degree_wape": 33.39942926376938
+    },
+    "tile_5000": {
+      "objective": 20.45830471401845,
+      "area_wape": {
+        "australia": 10.593209831717111,
+        "north": 14.162419377614574,
+        "southeast": 17.31135829829006,
+        "southwest": 20.822873888649184
+      },
+      "pooled_half_degree_wape": 33.34948712215363
+    },
+    "tile_quarter_500": {
+      "objective": 16.24635661098151,
+      "area_wape": {
+        "australia": 5.212325732195051,
+        "north": 7.048398700804572,
+        "southeast": 14.656386603692601,
+        "southwest": 13.791533284668288
+      },
+      "pooled_half_degree_wape": 31.69463790436099
+    },
+    "tile_quarter_5000": {
+      "objective": 17.572656161968673,
+      "area_wape": {
+        "australia": 6.876934164588733,
+        "north": 8.217498747145214,
+        "southeast": 16.184177169072637,
+        "southwest": 17.320111385322086
+      },
+      "pooled_half_degree_wape": 31.93377188747064
+    },
+    "tile_month_500": {
+      "objective": 16.293114884589432,
+      "area_wape": {
+        "australia": 4.552060743584416,
+        "north": 6.7353245843565865,
+        "southeast": 15.25685613754895,
+        "southwest": 17.62409881265891
+      },
+      "pooled_half_degree_wape": 31.121857398662407
+    },
+    "tile_month_5000": {
+      "objective": 18.382917732710656,
+      "area_wape": {
+        "australia": 7.909046891217088,
+        "north": 9.902881091190165,
+        "southeast": 15.07966991444065,
+        "southwest": 18.941249451689064
+      },
+      "pooled_half_degree_wape": 32.59843948780826
+    }
+  },
+  "national_guardrail_wape": 15.050414861041906,
+  "selected_model": {
+    "mode": "tile_quarter",
+    "prior_modis_count": 500.0,
+    "global_ratio": {
+      "d": 3.487492574130062,
+      "n": 8.720047219196
+    },
+    "tables": {
+      "d": [
+        {
+          "lat_tile": -3,
+          "lon_tile": 11,
+          "quarter": 1,
+          "ratio": 3.2721895835295167
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 12,
+          "quarter": 3,
+          "ratio": 2.8447079140098377
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 11,
+          "quarter": 2,
+          "ratio": 3.497502563874564
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 14,
+          "quarter": 3,
+          "ratio": 3.356417268537038
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 13,
+          "quarter": 2,
+          "ratio": 3.4474727513698
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 15,
+          "quarter": 1,
+          "ratio": 3.6370019792544
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 12,
+          "quarter": 0,
+          "ratio": 3.171927788663515
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 13,
+          "quarter": 3,
+          "ratio": 2.856507049929916
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 15,
+          "quarter": 0,
+          "ratio": 3.8238882423926266
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 15,
+          "quarter": 2,
+          "ratio": 3.703404288277676
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 14,
+          "quarter": 0,
+          "ratio": 3.249714594404587
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 11,
+          "quarter": 1,
+          "ratio": 3.3761475759363777
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 11,
+          "quarter": 0,
+          "ratio": 3.2698392069464295
+        },
+        {
+          "lat_tile": -5,
+          "lon_tile": 14,
+          "quarter": 1,
+          "ratio": 3.7015385436456274
+        },
+        {
+          "lat_tile": -1,
+          "lon_tile": 14,
+          "quarter": 2,
+          "ratio": 3.4965273011188733
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 11,
+          "quarter": 0,
+          "ratio": 3.093542008472007
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 11,
+          "quarter": 3,
+          "ratio": 3.493492574130062
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 14,
+          "quarter": 3,
+          "ratio": 3.930071924324629
+        },
+        {
+          "lat_tile": -1,
+          "lon_tile": 14,
+          "quarter": 0,
+          "ratio": 3.487492574130062
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 12,
+          "quarter": 1,
+          "ratio": 2.9261923385156186
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 12,
+          "quarter": 2,
+          "ratio": 2.8407012894236567
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 12,
+          "quarter": 0,
+          "ratio": 3.3512500201769355
+        },
+        {
+          "lat_tile": -5,
+          "lon_tile": 14,
+          "quarter": 2,
+          "ratio": 3.9077162734595077
+        },
+        {
+          "lat_tile": -5,
+          "lon_tile": 14,
+          "quarter": 3,
+          "ratio": 4.214783245177975
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 14,
+          "quarter": 1,
+          "ratio": 4.2171352206457255
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 11,
+          "quarter": 2,
+          "ratio": 3.605714725299333
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 12,
+          "quarter": 2,
+          "ratio": 3.341712518676519
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 14,
+          "quarter": 2,
+          "ratio": 3.1377278604589987
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 13,
+          "quarter": 2,
+          "ratio": 3.698488575414143
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 13,
+          "quarter": 1,
+          "ratio": 3.3187675370411873
+        },
+        {
+          "lat_tile": -1,
+          "lon_tile": 14,
+          "quarter": 3,
+          "ratio": 3.4697946278515466
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 12,
+          "quarter": 2,
+          "ratio": 3.048699822123402
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 15,
+          "quarter": 0,
+          "ratio": 3.4615976237216195
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 12,
+          "quarter": 1,
+          "ratio": 3.1524748400943317
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 14,
+          "quarter": 2,
+          "ratio": 2.8031198317642962
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 13,
+          "quarter": 3,
+          "ratio": 3.5475607697663665
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 15,
+          "quarter": 3,
+          "ratio": 3.8313983387387847
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 13,
+          "quarter": 0,
+          "ratio": 3.1849831039944494
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 11,
+          "quarter": 1,
+          "ratio": 3.487542404512014
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 11,
+          "quarter": 3,
+          "ratio": 2.458598484755865
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 11,
+          "quarter": 2,
+          "ratio": 2.561403705334413
+        },
+        {
+          "lat_tile": -5,
+          "lon_tile": 14,
+          "quarter": 0,
+          "ratio": 3.680011926980504
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 12,
+          "quarter": 0,
+          "ratio": 3.9279040714496265
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 14,
+          "quarter": 0,
+          "ratio": 3.7535650459125387
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 14,
+          "quarter": 2,
+          "ratio": 3.9317938935108967
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 12,
+          "quarter": 3,
+          "ratio": 3.460989966254708
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 15,
+          "quarter": 2,
+          "ratio": 3.2069840010171
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 13,
+          "quarter": 0,
+          "ratio": 3.5765892237742047
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 12,
+          "quarter": 3,
+          "ratio": 3.0715560063371177
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 11,
+          "quarter": 0,
+          "ratio": 3.487492574130062
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 15,
+          "quarter": 1,
+          "ratio": 3.317246278164455
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 13,
+          "quarter": 2,
+          "ratio": 3.2454060943819996
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 13,
+          "quarter": 3,
+          "ratio": 3.167167194543951
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 15,
+          "quarter": 3,
+          "ratio": 4.288924712970415
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 13,
+          "quarter": 0,
+          "ratio": 3.1643443970921408
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 11,
+          "quarter": 3,
+          "ratio": 3.988693317753243
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 14,
+          "quarter": 1,
+          "ratio": 2.6698634061742323
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 14,
+          "quarter": 3,
+          "ratio": 3.921132356581901
+        },
+        {
+          "lat_tile": -1,
+          "lon_tile": 14,
+          "quarter": 1,
+          "ratio": 3.489492574130062
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 14,
+          "quarter": 1,
+          "ratio": 2.6752668687776326
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 12,
+          "quarter": 1,
+          "ratio": 3.7726256380108887
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 14,
+          "quarter": 0,
+          "ratio": 4.545579899414841
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 13,
+          "quarter": 1,
+          "ratio": 2.870076964707822
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 13,
+          "quarter": 1,
+          "ratio": 3.9497317690288627
+        }
+      ],
+      "n": [
+        {
+          "lat_tile": -3,
+          "lon_tile": 12,
+          "quarter": 2,
+          "ratio": 9.222359558434636
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 12,
+          "quarter": 3,
+          "ratio": 5.4904482222242645
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 14,
+          "quarter": 3,
+          "ratio": 9.746577977278829
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 14,
+          "quarter": 2,
+          "ratio": 10.146678446485005
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 11,
+          "quarter": 2,
+          "ratio": 8.720047219196
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 15,
+          "quarter": 3,
+          "ratio": 12.940449083585627
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 13,
+          "quarter": 1,
+          "ratio": 9.19420895095351
+        },
+        {
+          "lat_tile": -1,
+          "lon_tile": 14,
+          "quarter": 1,
+          "ratio": 8.720047219196
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 12,
+          "quarter": 0,
+          "ratio": 7.397882387062979
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 12,
+          "quarter": 1,
+          "ratio": 8.66863406545124
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 14,
+          "quarter": 0,
+          "ratio": 8.125023896100458
+        },
+        {
+          "lat_tile": -1,
+          "lon_tile": 14,
+          "quarter": 3,
+          "ratio": 8.691208757890765
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 14,
+          "quarter": 1,
+          "ratio": 18.02627907241919
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 15,
+          "quarter": 2,
+          "ratio": 15.33508875756533
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 12,
+          "quarter": 0,
+          "ratio": 6.104695969880138
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 15,
+          "quarter": 1,
+          "ratio": 13.348328853883707
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 11,
+          "quarter": 1,
+          "ratio": 8.722047219196
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 14,
+          "quarter": 0,
+          "ratio": 8.130128126473728
+        },
+        {
+          "lat_tile": -5,
+          "lon_tile": 14,
+          "quarter": 2,
+          "ratio": 9.24267899724558
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 13,
+          "quarter": 2,
+          "ratio": 10.072060300735847
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 13,
+          "quarter": 2,
+          "ratio": 8.844468903322896
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 12,
+          "quarter": 1,
+          "ratio": 11.973908812854038
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 11,
+          "quarter": 0,
+          "ratio": 8.720047219196
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 13,
+          "quarter": 1,
+          "ratio": 13.024594160178552
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 12,
+          "quarter": 2,
+          "ratio": 7.855837937387783
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 11,
+          "quarter": 1,
+          "ratio": 8.663928811053621
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 11,
+          "quarter": 1,
+          "ratio": 16.539242162914423
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 15,
+          "quarter": 1,
+          "ratio": 15.811901026914617
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 13,
+          "quarter": 0,
+          "ratio": 8.121487699565892
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 12,
+          "quarter": 1,
+          "ratio": 9.67316641407518
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 12,
+          "quarter": 0,
+          "ratio": 11.047459732261856
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 14,
+          "quarter": 3,
+          "ratio": 8.259184982117588
+        },
+        {
+          "lat_tile": -5,
+          "lon_tile": 14,
+          "quarter": 0,
+          "ratio": 9.240102963875394
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 14,
+          "quarter": 0,
+          "ratio": 9.868298521533504
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 13,
+          "quarter": 0,
+          "ratio": 7.46537097709555
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 11,
+          "quarter": 2,
+          "ratio": 8.089104020544141
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 11,
+          "quarter": 0,
+          "ratio": 8.136083192576729
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 15,
+          "quarter": 0,
+          "ratio": 9.253367030561662
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 13,
+          "quarter": 3,
+          "ratio": 7.603561528474387
+        },
+        {
+          "lat_tile": -1,
+          "lon_tile": 14,
+          "quarter": 2,
+          "ratio": 8.728590039117764
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 14,
+          "quarter": 2,
+          "ratio": 15.72150359892662
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 11,
+          "quarter": 3,
+          "ratio": 15.21009935475869
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 11,
+          "quarter": 3,
+          "ratio": 8.720047219196
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 15,
+          "quarter": 3,
+          "ratio": 10.935816486869943
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 15,
+          "quarter": 0,
+          "ratio": 9.33241782428317
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 14,
+          "quarter": 2,
+          "ratio": 13.159152529975904
+        },
+        {
+          "lat_tile": -5,
+          "lon_tile": 14,
+          "quarter": 3,
+          "ratio": 9.048834248645646
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 11,
+          "quarter": 2,
+          "ratio": 12.450902775168965
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 14,
+          "quarter": 1,
+          "ratio": 12.141210914895813
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 13,
+          "quarter": 3,
+          "ratio": 8.198548118361337
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 11,
+          "quarter": 0,
+          "ratio": 5.787412841612026
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 13,
+          "quarter": 0,
+          "ratio": 6.560377781976378
+        },
+        {
+          "lat_tile": -2,
+          "lon_tile": 13,
+          "quarter": 3,
+          "ratio": 6.680552703888384
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 11,
+          "quarter": 3,
+          "ratio": 5.385611776207471
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 12,
+          "quarter": 2,
+          "ratio": 8.769713003977252
+        },
+        {
+          "lat_tile": -5,
+          "lon_tile": 14,
+          "quarter": 1,
+          "ratio": 11.397473733330129
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 15,
+          "quarter": 2,
+          "ratio": 16.300711530483294
+        },
+        {
+          "lat_tile": -4,
+          "lon_tile": 12,
+          "quarter": 3,
+          "ratio": 9.412992110614814
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 12,
+          "quarter": 3,
+          "ratio": 6.160108004310553
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 14,
+          "quarter": 3,
+          "ratio": 9.30395086675528
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 13,
+          "quarter": 2,
+          "ratio": 9.076367602407226
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 13,
+          "quarter": 1,
+          "ratio": 10.508723257692209
+        },
+        {
+          "lat_tile": -1,
+          "lon_tile": 14,
+          "quarter": 0,
+          "ratio": 8.720047219196
+        },
+        {
+          "lat_tile": -3,
+          "lon_tile": 14,
+          "quarter": 1,
+          "ratio": 11.806050866436044
+        }
+      ]
+    }
+  },
+  "baseline_model": {
+    "mode": "global",
+    "prior_modis_count": 500.0,
+    "global_ratio": {
+      "d": 3.487492574130062,
+      "n": 8.720047219196
+    },
+    "tables": {}
+  }
+}

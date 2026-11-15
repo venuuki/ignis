@@ -112,7 +112,7 @@ def normalise_firms(df: pl.DataFrame, region: str, source: str, cfg: dict) -> pl
             .when(pl.col("_conf").cast(pl.Float64, strict=False) >= 80).then(pl.lit("high"))
             .otherwise(pl.lit("nominal"))
         ).otherwise(
-            pl.col("_conf").str.to_lowercase().str.slice(0, 1).replace_strict({"l": "low", "n": "nominal", "h": "high"}, default="nominal", return_dtype=pl.Utf8)
+            pl.col("_conf").str.to_lowercase().replace_strict({"l": "low", "low": "low", "n": "nominal", "nominal": "nominal", "h": "high", "high": "high"}, default="unknown", return_dtype=pl.Utf8)
         ),
         _conf_num=pl.col("_conf").cast(pl.Float64, strict=False),
         frp=num("frp"),

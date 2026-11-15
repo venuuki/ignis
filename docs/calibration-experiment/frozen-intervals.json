@@ -1,0 +1,24 @@
+{
+  "phi": 11.708947949801653,
+  "alpha": 0.11946395258052743,
+  "variance_floor_count": 1.0,
+  "area_bands": {
+    "australia": {
+      "q80": 10.849383364543048,
+      "n_calibration_months": 12
+    },
+    "north": {
+      "q80": 5.443360024939904,
+      "n_calibration_months": 12
+    },
+    "southeast": {
+      "q80": 3.342459656462988,
+      "n_calibration_months": 12
+    },
+    "southwest": {
+      "q80": 5.646592408810465,
+      "n_calibration_months": 12
+    }
+  },
+  "scope": "Residual reference agreement only. Monthly serial dependence prevents an exchangeability guarantee; fixed evaluation areas only, not arbitrary-AOI calibrated intervals."
+}

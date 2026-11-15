@@ -289,6 +289,7 @@ def main() -> None:
     report = {
         "model_version": "fc-lgbm-v3.1-calibrated-region",
         "target_series": "modis_harmonized",
+        "source_policy": "modis_then_viirs_v1",
         "harmonization_built_at": json.loads((PROCESSED / "harmonization_report.json").read_text()).get("built_at"),
         "validation_note":"Rolling-origin skill conditional on retrospectively calibrated history; not a fully prospective end-to-end validation.",
         "harmonization_version": json.loads((PROCESSED / "harmonization_report.json").read_text())["method_version"],
