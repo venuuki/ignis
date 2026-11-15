@@ -1,0 +1,1060 @@
+{
+  "source_archive": "New folder.zip",
+  "sha256": "79764b3a08d33f9637873a0376f2f9ca32bf2eb7e167036d53e95eb11330d57b",
+  "imported_at": "2026-11-15T04:42:05.987106+00:00",
+  "file_count": 49,
+  "total_rows": 35564819,
+  "qc_rows": 32058448,
+  "backup_directory": "data\\import_backups\\20261115T044145Z",
+  "files": [
+    {
+      "file": "Australia__modis__2009.parquet",
+      "bytes": 6018319,
+      "sha256": "d76122319ee0ed54332c9593eefe3c61154838631fdaf3880038cb60db3f3920",
+      "rows": 251914,
+      "qc_rows": 236509,
+      "first": "2009-01-01",
+      "last": "2009-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "7c7a6f1b5c60fe1e1b5eaec69a6167797dc8f24ea8fe45dd45f507e190622636"
+    },
+    {
+      "file": "Australia__modis__2010.parquet",
+      "bytes": 2872582,
+      "sha256": "25c2d378992a2e2c60af8ec1242528239888a025eb3347980ad5aebe33377fdc",
+      "rows": 120558,
+      "qc_rows": 113415,
+      "first": "2010-01-01",
+      "last": "2010-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "75c9837c4f39eaea096877df841d5f686e6589d43f10ba6ea958d6f11b55835d"
+    },
+    {
+      "file": "Australia__modis__2011.parquet",
+      "bytes": 10615554,
+      "sha256": "d1db26ed5263cddc23673d6ed90ba621a2cbcdab47b22c1cd0f4ccbd67a709a2",
+      "rows": 437141,
+      "qc_rows": 412248,
+      "first": "2011-01-01",
+      "last": "2011-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "cee8803cd3740ee429e235389a3e30e2ca83bd7d7b593dcb9cca255603c33f0d"
+    },
+    {
+      "file": "Australia__modis__2012.parquet",
+      "bytes": 11581260,
+      "sha256": "22610643618d018b132578a049368922a1a024ac37cd52be8add619ecb77b8c1",
+      "rows": 474964,
+      "qc_rows": 448180,
+      "first": "2012-01-01",
+      "last": "2012-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "6e62567aa7cad83fb7ca2b66f3c4c7b2de30a8fc2f61e7de1e02184b794533d0"
+    },
+    {
+      "file": "Australia__modis__2013.parquet",
+      "bytes": 4575756,
+      "sha256": "fd5de80ff07d7d6e43feca1d400702dfdefe64988758cba2bfa44783fd6430a6",
+      "rows": 190517,
+      "qc_rows": 179532,
+      "first": "2013-01-01",
+      "last": "2013-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "b5e5569559fbb0e84b37ea150e0cab577826be3a1179393c084991989a8ab649"
+    },
+    {
+      "file": "Australia__modis__2014.parquet",
+      "bytes": 6188000,
+      "sha256": "ce350da26d9e20e0a92e81e27151c319d8a2e3a0952632f71a08d0853822d30c",
+      "rows": 256921,
+      "qc_rows": 242254,
+      "first": "2014-01-01",
+      "last": "2014-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "a82026e2468aef4390e3859c39af59080dd50263c0e018dcf6965d10bd64041c"
+    },
+    {
+      "file": "Australia__modis__2015.parquet",
+      "bytes": 5771637,
+      "sha256": "f97f902394616f302cb2345014bf80381bfbd7bc27d0a53622a4439fc578acd3",
+      "rows": 239462,
+      "qc_rows": 226031,
+      "first": "2015-01-01",
+      "last": "2015-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "2533e674594552c419ece226c952c0d27ec66182b69859c1788099235483c812"
+    },
+    {
+      "file": "Australia__modis__2016.parquet",
+      "bytes": 3774235,
+      "sha256": "a9fd9ffdde8982e159aa61bc4632ae7310aa876f140a7f9a33609ec63f71bd42",
+      "rows": 159223,
+      "qc_rows": 150199,
+      "first": "2016-01-01",
+      "last": "2016-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "acab0456f96d6b97c6bcc6bdb2ae9877742f49e4e1b71cefc2b9c7575b64a315"
+    },
+    {
+      "file": "Australia__modis__2017.parquet",
+      "bytes": 6611063,
+      "sha256": "cb9dd6297aa784b4a4b025076fe7ba334d67d9f093396028d6efedb3fbe88ea4",
+      "rows": 273312,
+      "qc_rows": 259358,
+      "first": "2017-01-01",
+      "last": "2017-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "a7dcdc6dd67f2b6484402ebf79927b7b41e6f31cddf1a9f9048b366203bb4611"
+    },
+    {
+      "file": "Australia__modis__2018.parquet",
+      "bytes": 7445466,
+      "sha256": "65dceb1ed1893acfd8edf2564233c3e1d355c3ef2831f75577f208181ca65a8d",
+      "rows": 307359,
+      "qc_rows": 289765,
+      "first": "2018-01-01",
+      "last": "2018-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "09cf4f90ff8f431336ade0a481b898bf53c4785700d68ef3b0094810a201b3a9"
+    },
+    {
+      "file": "Australia__modis__2019.parquet",
+      "bytes": 7456069,
+      "sha256": "3e96017c4792ce22f65fc076ca28ffbda70ecd94634e6a64ebe09759ba4fd9eb",
+      "rows": 310484,
+      "qc_rows": 289988,
+      "first": "2019-01-01",
+      "last": "2019-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "0ff65328b1207b8c09b013f449cc02e8eca0b0725e82277ec7dc5fb7ba0dc8d2"
+    },
+    {
+      "file": "Australia__modis__2020.parquet",
+      "bytes": 3671827,
+      "sha256": "bff3544beecaf817993825846de5a5e8cea776ee775547a6bd42447d68271e12",
+      "rows": 155524,
+      "qc_rows": 144556,
+      "first": "2020-01-01",
+      "last": "2020-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "34acb647e9311aefaf789ef1bdff0db128b1e18755b9e8be1628c43ba0437848"
+    },
+    {
+      "file": "Australia__modis__2021.parquet",
+      "bytes": 4109102,
+      "sha256": "6331019484518aaeba9495486d27bf7ba5f6b8a0be7a0971c3df097b42968cd6",
+      "rows": 171948,
+      "qc_rows": 162266,
+      "first": "2021-01-01",
+      "last": "2021-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "1384c265ae022345234e2df459768376b5cdbbdefd684a09f2a64522ccfd9627"
+    },
+    {
+      "file": "Australia__modis__2022.parquet",
+      "bytes": 3795794,
+      "sha256": "7d097c66d4215dd776c51ff26111a43b5500e27ed7720b9e926586a0801db9d1",
+      "rows": 160278,
+      "qc_rows": 150901,
+      "first": "2022-01-01",
+      "last": "2022-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "40f329e4c033ad2b5f044ae51f2068974337ed74cea69f753af7f9a1a7b6cb20"
+    },
+    {
+      "file": "Australia__modis__2023.parquet",
+      "bytes": 9537053,
+      "sha256": "567ceb9e5ea0ecf0b75bc0aaff7cd4341d80885456a1c5e6e24212a37b764560",
+      "rows": 395733,
+      "qc_rows": 373213,
+      "first": "2023-01-01",
+      "last": "2023-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "0888b74be4a880336c5f46a4645bd41c9c40262dbd555e50129d8fb6b961db65"
+    },
+    {
+      "file": "Australia__modis__2024.parquet",
+      "bytes": 5369271,
+      "sha256": "46171a6dd35c9572040d3bda415d752783f8f5663cad01ac62ea9232535ac49a",
+      "rows": 223807,
+      "qc_rows": 210724,
+      "first": "2024-01-01",
+      "last": "2024-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "90629a36d9407416e71bf3c69844fea0c041be9be758a92da6a3dea1d3cbcfff"
+    },
+    {
+      "file": "Australia__modis__2025.parquet",
+      "bytes": 6137429,
+      "sha256": "46d11c05f17ab079ae04d74bd41a0723f852d83ce40bb50ec793be4dbef89057",
+      "rows": 255336,
+      "qc_rows": 239970,
+      "first": "2025-01-01",
+      "last": "2025-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "035f66cc550765fbba00fc2df08146f96f64a6e56c4701cd9cc2e6fcd6432145"
+    },
+    {
+      "file": "Australia__recent.parquet",
+      "bytes": 54459114,
+      "sha256": "e1c4638b3e0ec6e419e44e21eea8ecd733d79f8a8f793166487f57ad3faf9560",
+      "rows": 2594137,
+      "qc_rows": 2346440,
+      "first": "2026-01-01",
+      "last": "2026-11-14",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS",
+        "VIIRS"
+      ],
+      "satellites": [
+        "Aqua",
+        "NOAA-20",
+        "NOAA-21",
+        "S-NPP",
+        "Terra"
+      ]
+    },
+    {
+      "file": "Australia__viirs-jpss1__2018.parquet",
+      "bytes": 34555631,
+      "sha256": "b3f160902e2c62f127e23a0f0019e29223fc1ad9293ec9ca8618fb9352259184",
+      "rows": 1334377,
+      "qc_rows": 1183666,
+      "first": "2018-04-01",
+      "last": "2018-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "NOAA-20"
+      ],
+      "previous_sha256": "852f5e2e7e44415ebf514a8f6b4c3a0ef624b04b2cc4e4a85d07bd34bda70e9d"
+    },
+    {
+      "file": "Australia__viirs-jpss1__2019.parquet",
+      "bytes": 40081870,
+      "sha256": "362c59b5a74293fbf8e8bd8ea6aa5eb069135a2499eed8d606c915e775b89a12",
+      "rows": 1554639,
+      "qc_rows": 1396957,
+      "first": "2019-01-01",
+      "last": "2019-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "NOAA-20"
+      ],
+      "previous_sha256": "e384b5bcdd577a5b0e6c2ae8451a78a3b7f2b83c8b9dafbdfccea98fc3beb037"
+    },
+    {
+      "file": "Australia__viirs-jpss1__2020.parquet",
+      "bytes": 21157299,
+      "sha256": "41da1b1ad8e7c1a9b912fd0f43f2782a641616e6b7231e216a768347e3552f17",
+      "rows": 829832,
+      "qc_rows": 734932,
+      "first": "2020-01-01",
+      "last": "2020-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "NOAA-20"
+      ],
+      "previous_sha256": "4031ab21e8dcb4ef64fab7ae9449d791b53fa5d7fb5b2e39712e4d5629a93897"
+    },
+    {
+      "file": "Australia__viirs-jpss1__2021.parquet",
+      "bytes": 20712956,
+      "sha256": "4d713dc914245b344e86c51d580d33c876502a1723472430e9d9da5e1019847f",
+      "rows": 812138,
+      "qc_rows": 710486,
+      "first": "2021-01-01",
+      "last": "2021-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "NOAA-20"
+      ]
+    },
+    {
+      "file": "Australia__viirs-jpss1__2022.parquet",
+      "bytes": 21141117,
+      "sha256": "0f0bfbdb97be35e0f06e5c732b8d21ba314ab6a363d13a5822ff552ef04c262f",
+      "rows": 826534,
+      "qc_rows": 728075,
+      "first": "2022-01-01",
+      "last": "2022-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "NOAA-20"
+      ]
+    },
+    {
+      "file": "Australia__viirs-jpss1__2023.parquet",
+      "bytes": 46103884,
+      "sha256": "c3351d57b569c5385edac7de8eddf4bc83a009e10df70f4d763d4895d850274b",
+      "rows": 1782337,
+      "qc_rows": 1577640,
+      "first": "2023-01-01",
+      "last": "2023-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "NOAA-20"
+      ]
+    },
+    {
+      "file": "Australia__viirs-jpss1__2024.parquet",
+      "bytes": 27206235,
+      "sha256": "1f7c064357cdb5ba789f2177e8c94b4e23e56624f41c799ebff1114831ed10d2",
+      "rows": 1059409,
+      "qc_rows": 947693,
+      "first": "2024-01-01",
+      "last": "2024-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "NOAA-20"
+      ]
+    },
+    {
+      "file": "Australia__viirs-jpss1__2025.parquet",
+      "bytes": 32328142,
+      "sha256": "bcf086fc094c5cc8f39c3d1433225160bbe34cb4726917dd45ae0d6fe757cd9b",
+      "rows": 1247848,
+      "qc_rows": 1119898,
+      "first": "2025-01-01",
+      "last": "2025-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "NOAA-20"
+      ]
+    },
+    {
+      "file": "Australia__viirs-snpp__2012.parquet",
+      "bytes": 56021549,
+      "sha256": "786fca4e95c4ef90f1d3a38770ade4db5ddcf7a1bdf57f36868263c3198f7946",
+      "rows": 2143783,
+      "qc_rows": 1936612,
+      "first": "2012-01-20",
+      "last": "2012-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ],
+      "previous_sha256": "968e6fc73b0eaedf979251cd7ecc79fb95181d6a99c53f09928cf3343f508fd7"
+    },
+    {
+      "file": "Australia__viirs-snpp__2013.parquet",
+      "bytes": 24345648,
+      "sha256": "715b035aa7c658d239bb99a32d9c1e8e5b69bf6fc6d838dd262b30ce646090ef",
+      "rows": 947247,
+      "qc_rows": 841212,
+      "first": "2013-01-01",
+      "last": "2013-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ],
+      "previous_sha256": "d49287a3033906d61a4ae22f86ef6aaa6fd6ffdf280684a9b1715a5c6b5ed823"
+    },
+    {
+      "file": "Australia__viirs-snpp__2014.parquet",
+      "bytes": 31535268,
+      "sha256": "e8dfac93e1c0100105200b27d6dad3d3f2dd17081901017fe8a5312c1b8eb316",
+      "rows": 1216711,
+      "qc_rows": 1074778,
+      "first": "2014-01-01",
+      "last": "2014-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ],
+      "previous_sha256": "dfcd1c4a44ee59af36c761e239eba9a3c465578fdb0954d80c757e55038c9b18"
+    },
+    {
+      "file": "Australia__viirs-snpp__2015.parquet",
+      "bytes": 29628945,
+      "sha256": "d9578cff8cca284e2708a67f0ff963cbe6f6c60fb208c954fc9ba811d622dd2f",
+      "rows": 1143154,
+      "qc_rows": 1009577,
+      "first": "2015-01-01",
+      "last": "2015-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ],
+      "previous_sha256": "16dae16eb8a334279eba6221e53be084a7d60625382d72302b9ccf35302a1aa2"
+    },
+    {
+      "file": "Australia__viirs-snpp__2016.parquet",
+      "bytes": 20005048,
+      "sha256": "3f52dc0e213f9e34bc76e0c8804f470764f9525efa429571efe0b4fe69473a4a",
+      "rows": 777831,
+      "qc_rows": 691033,
+      "first": "2016-01-01",
+      "last": "2016-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ],
+      "previous_sha256": "a4f71d5b4007a494ea61f004baac20e4c9d832918d66b1d7d5f8b2456125b104"
+    },
+    {
+      "file": "Australia__viirs-snpp__2017.parquet",
+      "bytes": 32449598,
+      "sha256": "3c00a70b52734aaeab1b0651a5913cb68b788ef2bd5dac39abfd30fa80bb6d6c",
+      "rows": 1241740,
+      "qc_rows": 1097138,
+      "first": "2017-01-01",
+      "last": "2017-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ],
+      "previous_sha256": "eba40e56a786b24bdd84de53d3a679daffff5c2f89cdfa3169d041fe8c23e53a"
+    },
+    {
+      "file": "Australia__viirs-snpp__2018.parquet",
+      "bytes": 38234702,
+      "sha256": "66c820a7865369951a05db367a567a7ae065fcde966f59beb160755a507d7867",
+      "rows": 1470573,
+      "qc_rows": 1311115,
+      "first": "2018-01-01",
+      "last": "2018-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ],
+      "previous_sha256": "c94641e92db29dfbeb52ac714671c74093d2cb7e9af31c6cca29e351ef82c00d"
+    },
+    {
+      "file": "Australia__viirs-snpp__2019.parquet",
+      "bytes": 40700910,
+      "sha256": "14f2922d2b1f14f94771dbd6c3a985080f58edb0df26a0647f3e35a6c40d9c90",
+      "rows": 1580239,
+      "qc_rows": 1425217,
+      "first": "2019-01-01",
+      "last": "2019-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ],
+      "previous_sha256": "525e87e77a503f6904a86312b98d52ddabe5d0e3e4161ece5b4d5b5395e58bf5"
+    },
+    {
+      "file": "Australia__viirs-snpp__2020.parquet",
+      "bytes": 21663040,
+      "sha256": "be1f09af387e2f3cb15dcc1bdddc4425b83c56900e70aad4000b4ca4eb53e3d3",
+      "rows": 847689,
+      "qc_rows": 754711,
+      "first": "2020-01-01",
+      "last": "2020-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ],
+      "previous_sha256": "d3fe80b197d30f48d977992ca606072a764613631244d6117822b794edda4aff"
+    },
+    {
+      "file": "Australia__viirs-snpp__2021.parquet",
+      "bytes": 20924954,
+      "sha256": "ed2dc2abc56772522b84d7e49e1106b89339edbd580fafd02da8cef5bbc19325",
+      "rows": 819461,
+      "qc_rows": 721087,
+      "first": "2021-01-01",
+      "last": "2021-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ],
+      "previous_sha256": "2c14fb65f605e5e0bd50c975a7ee800cd5197f47ad15bd0014a17791b86cb18e"
+    },
+    {
+      "file": "Australia__viirs-snpp__2022.parquet",
+      "bytes": 20524082,
+      "sha256": "43f0dc0e2ac4020ad1791f993b0b66a2689e26cba3b00b565bad5433da2ce631",
+      "rows": 804720,
+      "qc_rows": 708930,
+      "first": "2022-01-01",
+      "last": "2022-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ],
+      "previous_sha256": "3a46565cfb23c81945129d3f27000805f0281bcfb83db9f79ab89a7f5f8e0f7c"
+    },
+    {
+      "file": "Australia__viirs-snpp__2023.parquet",
+      "bytes": 48073753,
+      "sha256": "f624346f87b3044a948e873f5b79d039973c2216f1ee469e3f0a977b3a9401a5",
+      "rows": 1855271,
+      "qc_rows": 1660101,
+      "first": "2023-01-01",
+      "last": "2023-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ]
+    },
+    {
+      "file": "Australia__viirs-snpp__2024.parquet",
+      "bytes": 25237088,
+      "sha256": "ed373ae376de86237f5e67dacc214eb658eca9e54afb0bf63b0beed669118336",
+      "rows": 979866,
+      "qc_rows": 881612,
+      "first": "2024-01-01",
+      "last": "2024-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ]
+    },
+    {
+      "file": "Australia__viirs-snpp__2025.parquet",
+      "bytes": 32417690,
+      "sha256": "5928ce30c88128912e589356d48ff5282f5e91086744b8c52158a967f9546e53",
+      "rows": 1251437,
+      "qc_rows": 1127200,
+      "first": "2025-01-01",
+      "last": "2025-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "VIIRS"
+      ],
+      "satellites": [
+        "S-NPP"
+      ]
+    },
+    {
+      "file": "Australia__modis__2000.parquet",
+      "bytes": 722636,
+      "sha256": "127836fa075a7d73d5553b03501ef84aeb0f114a58f7c2cb5df4889139801495",
+      "rows": 30724,
+      "qc_rows": 29361,
+      "first": "2000-11-01",
+      "last": "2000-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Terra"
+      ],
+      "previous_sha256": "49a5529424411c3225c8a45defa0899be53c5c59e50b9eb2ec968d490217c144"
+    },
+    {
+      "file": "Australia__modis__2001.parquet",
+      "bytes": 5663757,
+      "sha256": "8c03f949118e289f701f4e1d438c0a6448754666e8e7324002989179d11ae516",
+      "rows": 235315,
+      "qc_rows": 221119,
+      "first": "2001-01-01",
+      "last": "2001-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Terra"
+      ],
+      "previous_sha256": "b8766649d6c2c90fdfc8eec2aa831b27c2662bd33dcadd25eafd2de0c279541f"
+    },
+    {
+      "file": "Australia__modis__2002.parquet",
+      "bytes": 8167954,
+      "sha256": "b82950fa4ea656522bef040de1b99a69f6b2e2bf793f2b7b3d500045b0acc029",
+      "rows": 335342,
+      "qc_rows": 316543,
+      "first": "2002-01-01",
+      "last": "2002-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "91b34dd12c0fed144411692f7bab34061c58770a30bdb1ff09b1276b95e032d3"
+    },
+    {
+      "file": "Australia__modis__2003.parquet",
+      "bytes": 5081185,
+      "sha256": "3cdb31e8c74498bffae7387e15c5c4c1cd9adf165b9e11aa11e27fee7c18b26d",
+      "rows": 212359,
+      "qc_rows": 200048,
+      "first": "2003-01-01",
+      "last": "2003-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "6b17a892acd41a6f4c1dbd0d1fe6074153e253f75578099966d638e34695292b"
+    },
+    {
+      "file": "Australia__modis__2004.parquet",
+      "bytes": 7556147,
+      "sha256": "6cc0fc01af8c5e44d02d95d3fbbab7e6e0bb059fc52f3ac214d71ef2c0fb5a5b",
+      "rows": 312386,
+      "qc_rows": 295906,
+      "first": "2004-01-01",
+      "last": "2004-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "9ede5b3e81855bf651f7a13fae5ed3bf77b34999d16c13cbaad786ac8ade9ce7"
+    },
+    {
+      "file": "Australia__modis__2005.parquet",
+      "bytes": 4560060,
+      "sha256": "8592cde4487917432694452631258f83e3de5c0ec336967221efd7b5be124754",
+      "rows": 190139,
+      "qc_rows": 178447,
+      "first": "2005-01-01",
+      "last": "2005-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "6bc6b38d5ec386c6fe35c3eb5c2c742d245960f180743145d216495b0e4d2c9b"
+    },
+    {
+      "file": "Australia__modis__2006.parquet",
+      "bytes": 7383572,
+      "sha256": "a551df04cf9ce99c7238846ae458939fdc46e91e175a3ae315afa54e6315c544",
+      "rows": 304651,
+      "qc_rows": 288171,
+      "first": "2006-01-01",
+      "last": "2006-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "e5a4dc8abf7ea218f5b65b16bd699fa65d9321ac31007baa6b311d92115ce0b0"
+    },
+    {
+      "file": "Australia__modis__2007.parquet",
+      "bytes": 6128254,
+      "sha256": "3598fa596c1ef60e5f8b7bca3324827a3f3dbf8b4a12f20bc7ff0567a10f2180",
+      "rows": 254931,
+      "qc_rows": 240628,
+      "first": "2007-01-01",
+      "last": "2007-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "2472cc0172b0e26ebd51000d08808f14ce513066c6fde61f9675f2dad4fd0c03"
+    },
+    {
+      "file": "Australia__modis__2008.parquet",
+      "bytes": 4392710,
+      "sha256": "5af644982f6c40a39d38cbdd76f701abacb9161cb4c27ef5c2f7a02ec3c778ea",
+      "rows": 183518,
+      "qc_rows": 173006,
+      "first": "2008-01-01",
+      "last": "2008-12-31",
+      "wrong_region": 0,
+      "bad_date": 0,
+      "bad_coordinates": 0,
+      "bad_cell": 0,
+      "bad_parent": 0,
+      "sensors": [
+        "MODIS"
+      ],
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "previous_sha256": "46093c932d819927868e20009f2b68acd74a5c994a2c6dbd1726fd295ba87ac2"
+    }
+  ]
+}

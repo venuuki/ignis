@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "embercal"
+version = "0.1.0"
+description = "NASA FIRMS MODIS/VIIRS ingestion, caching and first comparisons"
+requires-python = ">=3.10"
+dependencies = ["pandas>=2.0,<3", "httpx>=0.25,<1", "python-dotenv>=1,<2", "matplotlib>=3.7,<4", "pyproj>=3.6,<4",]
+
+[project.optional-dependencies]
+test = ["pytest>=7,<10"]
+analysis = ["polars>=1", "pyarrow>=15", "duckdb>=1", "numpy>=1.26", "scipy>=1.12", "shapely>=2", "lightgbm>=4.3", "scikit-learn>=1.4", "requests>=2.31", "pyyaml>=6", "pydantic-settings>=2.2", "cachetools>=5.3"]
+
+[project.scripts]
+embercal = "ignis.cli:main"
+ignis = "ignis.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["ignis*", "embercal_engine*"]

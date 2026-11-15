@@ -1,0 +1,13 @@
+# Private/runtime files
+.env*
+**/.env*
+.venv/
+venv/
+node_modules/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.egg-info/
+*.tsbuildinfo
+data/regional_cache/
+*.zip

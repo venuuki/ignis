@@ -1,0 +1,16 @@
+{
+    "origin":  "Copied from your existing IGNIS NASA FIRMS results; no synthetic default data.",
+    "historical":  "2019-2024; type=0, all confidence levels",
+    "recent":  "2026-11-08 through 2026-11-12; all returned types",
+    "evaluation":  "2025 withheld; not bundled",
+    "files":  {
+                  "modis_observations.csv":  "21774a6a847fa26a06f2d2c488682b9ecc93656e721407fa789aa6844d444cca",
+                  "viirs_observations.csv":  "637030be311b755b44d1981db8b103a2f6dc52c998a622ec9a5105de3a46130a",
+                  "modis_vegetation_monthly_development.csv":  "2a149a0a8f930c1f62222119becd495a6836c402af804d5001532609b170829e",
+                  "viirs_vegetation_monthly_development.csv":  "a46e1a5c3f21546b9110242535509d5ff029ae7b7e115c4cca8e95f39b54405a",
+                  "baseline_predictions.csv":  "a5d610e6d8e7052ecdaa269c79e163bd9742e0ad680457ec1c3e06bedfd66bcd",
+                  "baseline_scores.csv":  "c2b55d303161780eed0b22428cd832c165297882a836dcfb59f07b5372e144fa",
+                  "baseline_annual_scores.csv":  "6f097cd682af15c7aaf0b39c681133a8f9f88a0ad25d7da465214f3945ab905a",
+                  "stress_scores.csv":  "dc8bed17a0ae9dced52af729adeca75fa727fa3f4e74dff433bf3f96ad491ec0"
+              }
+}

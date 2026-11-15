@@ -1,0 +1,339 @@
+{
+  "method_version": "harm-v2.0",
+  "unit": "VIIRS S-NPP-equivalent hotspots (375 m, nominal+high confidence, vegetation fires)",
+  "countries": [
+    "Australia"
+  ],
+  "grid": {
+    "cell_deg": 0.1,
+    "region_deg": 0.5,
+    "driver_deg": 2.0
+  },
+  "cleaning": {
+    "keep_types": [
+      0
+    ],
+    "modis_min_confidence": 30,
+    "viirs_confidence": [
+      "n",
+      "h"
+    ]
+  },
+  "overlap_years": [
+    2012,
+    2025
+  ],
+  "training_years": [
+    2013,
+    2016,
+    2018,
+    2023
+  ],
+  "holdout_years": [
+    2019,
+    2020,
+    2021
+  ],
+  "drift_downweight": {
+    "from_year": 2021,
+    "weight": 0.5
+  },
+  "training_sampling": {
+    "empty_cell_month_sample": 0.15,
+    "reweight": 6.667
+  },
+  "selected_model": "gbm",
+  "selected_model_terra_only": "gbm",
+  "holdout_metrics": {
+    "naive_modis": {
+      "cell_mae": 1.1236,
+      "cell_poisson_deviance": 6.5587,
+      "region_month_mae": 21.431,
+      "region_month_r_log": 0.9233,
+      "country_month_mape_pct": 79.27,
+      "country_month_r_log": 0.9887,
+      "country_month_bias_pct": -79.43,
+      "country_year_abs_err_pct": 79.33
+    },
+    "global_ratio": {
+      "cell_mae": 0.6837,
+      "cell_poisson_deviance": 4.6826,
+      "region_month_mae": 8.322,
+      "region_month_r_log": 0.9274,
+      "country_month_mape_pct": 11.65,
+      "country_month_r_log": 0.9862,
+      "country_month_bias_pct": -4.37,
+      "country_year_abs_err_pct": 5.58
+    },
+    "stratified_eb": {
+      "cell_mae": 0.9082,
+      "cell_poisson_deviance": 1.3688,
+      "region_month_mae": 11.139,
+      "region_month_r_log": 0.8606,
+      "country_month_mape_pct": 12.38,
+      "country_month_r_log": 0.9879,
+      "country_month_bias_pct": 8.73,
+      "country_year_abs_err_pct": 8.8
+    },
+    "gbm": {
+      "cell_mae": 0.6832,
+      "cell_poisson_deviance": 0.997,
+      "region_month_mae": 7.203,
+      "region_month_r_log": 0.9416,
+      "country_month_mape_pct": 6.84,
+      "country_month_r_log": 0.9871,
+      "country_month_bias_pct": -2.46,
+      "country_year_abs_err_pct": 2.35
+    },
+    "ensemble": {
+      "cell_mae": 0.7619,
+      "cell_poisson_deviance": 1.0942,
+      "region_month_mae": 8.575,
+      "region_month_r_log": 0.906,
+      "country_month_mape_pct": 7.52,
+      "country_month_r_log": 0.9903,
+      "country_month_bias_pct": 3.13,
+      "country_year_abs_err_pct": 3.22
+    }
+  },
+  "holdout_metrics_terra_only": {
+    "stratified_eb": {
+      "cell_mae": 1.2979,
+      "cell_poisson_deviance": 2.5741,
+      "region_month_mae": 16.872,
+      "region_month_r_log": 0.7496,
+      "country_month_mape_pct": 24.19,
+      "country_month_r_log": 0.9743,
+      "country_month_bias_pct": 10.37,
+      "country_year_abs_err_pct": 12.05
+    },
+    "gbm": {
+      "cell_mae": 0.7413,
+      "cell_poisson_deviance": 1.0873,
+      "region_month_mae": 7.879,
+      "region_month_r_log": 0.9337,
+      "country_month_mape_pct": 8.32,
+      "country_month_r_log": 0.9904,
+      "country_month_bias_pct": -5.28,
+      "country_year_abs_err_pct": 5.43
+    },
+    "ensemble": {
+      "cell_mae": 0.9507,
+      "cell_poisson_deviance": 1.4322,
+      "region_month_mae": 11.378,
+      "region_month_r_log": 0.8454,
+      "country_month_mape_pct": 11.85,
+      "country_month_r_log": 0.9893,
+      "country_month_bias_pct": 2.54,
+      "country_year_abs_err_pct": 3.31
+    }
+  },
+  "holdout_metrics_by_country": {
+    "Australia": {
+      "naive_modis": {
+        "cell_mae": 1.1236,
+        "cell_poisson_deviance": 6.5587,
+        "region_month_mae": 21.431,
+        "region_month_r_log": 0.9233,
+        "country_month_mape_pct": 79.27,
+        "country_month_r_log": 0.9887,
+        "country_month_bias_pct": -79.43,
+        "country_year_abs_err_pct": 79.33
+      },
+      "global_ratio": {
+        "cell_mae": 0.6837,
+        "cell_poisson_deviance": 4.6826,
+        "region_month_mae": 8.322,
+        "region_month_r_log": 0.9274,
+        "country_month_mape_pct": 11.65,
+        "country_month_r_log": 0.9862,
+        "country_month_bias_pct": -4.37,
+        "country_year_abs_err_pct": 5.58
+      },
+      "gbm": {
+        "cell_mae": 0.6832,
+        "cell_poisson_deviance": 0.997,
+        "region_month_mae": 7.203,
+        "region_month_r_log": 0.9416,
+        "country_month_mape_pct": 6.84,
+        "country_month_r_log": 0.9871,
+        "country_month_bias_pct": -2.46,
+        "country_year_abs_err_pct": 2.35
+      }
+    }
+  },
+  "variance_model": {
+    "full": {
+      "phi": 31.3726,
+      "alpha": 0.02601,
+      "kappa_region": 1.0,
+      "kappa_country": 3.315
+    },
+    "terra_only": {
+      "phi": 44.1223,
+      "alpha": 0.03986,
+      "kappa_region": 1.0,
+      "kappa_country": 3.287
+    }
+  },
+  "noaa20_to_snpp_ratio": {
+    "d": {
+      "global": 1.0169527193472467,
+      "Australia": 1.0169527193472467
+    },
+    "n": {
+      "global": 0.9893459591211029,
+      "Australia": 0.9893459591211028
+    }
+  },
+  "stratified_eb_summary": {
+    "d": {
+      "global_ratio": 3.182,
+      "small_fire_baseline": 0.0757,
+      "cells_with_own_factor": 36290
+    },
+    "n": {
+      "global_ratio": 6.686,
+      "small_fire_baseline": 0.1351,
+      "cells_with_own_factor": 22863
+    }
+  },
+  "gbm_feature_importance": {
+    "modis_frp": 0.5617,
+    "modis_frp_max": 0.3007,
+    "reg_aqua": 0.0428,
+    "aqua_d": 0.0349,
+    "lon": 0.0103,
+    "clim_cell_moy": 0.0096,
+    "reg_terra": 0.0088,
+    "lat": 0.0077,
+    "terra_d": 0.0063,
+    "terra_n": 0.0039,
+    "aqua_n": 0.0039,
+    "clim_cell": 0.0031,
+    "moy_cos": 0.0022,
+    "ctry_terra_pc": 0.0015,
+    "moy_sin": 0.0014,
+    "ctry_aqua_pc": 0.0013,
+    "ctry_code": 0.0
+  },
+  "gbm_trees": 309,
+  "calibration_by_year": [
+    {
+      "year": 2013,
+      "obs_over_pred": 1.0151,
+      "set": "train"
+    },
+    {
+      "year": 2016,
+      "obs_over_pred": 1.0057,
+      "set": "train"
+    },
+    {
+      "year": 2018,
+      "obs_over_pred": 1.0072,
+      "set": "train"
+    },
+    {
+      "year": 2019,
+      "obs_over_pred": 1.0281,
+      "set": "holdout"
+    },
+    {
+      "year": 2020,
+      "obs_over_pred": 1.0436,
+      "set": "holdout"
+    },
+    {
+      "year": 2021,
+      "obs_over_pred": 1.0015,
+      "set": "holdout"
+    },
+    {
+      "year": 2023,
+      "obs_over_pred": 1.0084,
+      "set": "train"
+    }
+  ],
+  "calibration_trend_per_year": 0.00019,
+  "raw_viirs_to_aqua_ratio_by_year": [
+    {
+      "year": 2012,
+      "ratio": 7.959
+    },
+    {
+      "year": 2013,
+      "ratio": 8.018
+    },
+    {
+      "year": 2014,
+      "ratio": 7.786
+    },
+    {
+      "year": 2015,
+      "ratio": 7.833
+    },
+    {
+      "year": 2016,
+      "ratio": 7.76
+    },
+    {
+      "year": 2017,
+      "ratio": 7.318
+    },
+    {
+      "year": 2018,
+      "ratio": 7.89
+    },
+    {
+      "year": 2019,
+      "ratio": 8.678
+    },
+    {
+      "year": 2020,
+      "ratio": 8.611
+    },
+    {
+      "year": 2021,
+      "ratio": 7.092
+    },
+    {
+      "year": 2022,
+      "ratio": 7.79
+    },
+    {
+      "year": 2023,
+      "ratio": 7.922
+    },
+    {
+      "year": 2024,
+      "ratio": 6.817
+    },
+    {
+      "year": 2025,
+      "ratio": 7.976
+    },
+    {
+      "year": 2026,
+      "ratio": 7.68
+    }
+  ],
+  "step_change_tests": {
+    "Australia": {
+      "naive": {
+        "change_point": "2011-12",
+        "K": 6902.0,
+        "p_value": 0.0,
+        "jump_at_2012_factor": 5.24
+      },
+      "harm": {
+        "change_point": "2011-02",
+        "K": 2174.0,
+        "p_value": 0.00524,
+        "jump_at_2012_factor": 1.16
+      }
+    }
+  },
+  "rows_stored": 5872054,
+  "data_last_date": "2026-11-14"
+}

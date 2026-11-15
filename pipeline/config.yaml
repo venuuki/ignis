@@ -1,0 +1,35 @@
+# EmberCal pipeline configuration
+# Countries use FIRMS "country yearly" archive naming (spaces -> underscores).
+# Australia is the only supported prototype region.
+regions:
+  - name: Australia
+    iso3: AUS
+    bbox: [112.0, -44.5, 154.5, -9.0]   # west, south, east, north (used for API / NRT fetches)
+    nrt_region: Australia_NewZealand
+
+years:
+  modis: [2000, 2025]        # Terra from Nov 2000, Aqua from Jul 2002
+  viirs-snpp: [2012, 2025]
+  viirs-jpss1: [2018, 2025]  # NOAA-20
+
+grid:
+  cell_deg: 0.1              # analysis cell (~11 km, ~120 km2)
+  region_deg: 0.5            # region used for ratio pooling and forecasting (= MODIS CMG grid)
+  driver_deg: 2.0            # NASA POWER climate drivers grid (climate anomalies are smooth at this scale)
+
+cleaning:
+  keep_types: [0]            # 0 = presumed vegetation fire (drop volcano / static / offshore)
+  modis_min_confidence: 30
+  viirs_confidence: [n, h]   # nominal + high
+
+harmonization:
+  target: viirs_snpp         # harmonized unit = S-NPP-equivalent hotspots
+  overlap_years: [2012, 2025]
+  calibration_years: [2017, 2022]  # choose models and fit intervals; separate from final test
+  holdout_years: [2019, 2020, 2021]  # never trained on: blind test (includes Australia's Black Summer)
+  training_years: [2013, 2016, 2018, 2023]  # sample of overlap years used to fit the models (speed)
+  shrinkage_k: 30            # pseudo-count (MODIS detections) for empirical-Bayes shrinkage
+  drift_downweight_from: 2021   # Terra/Aqua orbit drift: down-weight later overlap years
+  drift_weight: 0.5
+
+baseline: [2003, 2022]

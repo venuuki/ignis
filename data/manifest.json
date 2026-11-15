@@ -1,0 +1,42 @@
+{
+  "firms_archive": {
+    "source": "User-supplied Australia Parquet archive",
+    "files": 48,
+    "last_date": "2025-12-31",
+    "updated_at": "2026-11-15T04:42:05.987106+00:00"
+  },
+  "firms_recent": {
+    "mode": "imported_api_parquet",
+    "coverage_start": "2026-01-01",
+    "last_date": "2026-11-14",
+    "updated_at": "2026-11-15T04:42:05.987106+00:00",
+    "coverage_basis": "Partition date span from supplied data; satellite observation coverage is not independently verified"
+  },
+  "local_parquet_import": {
+    "source_archive": "New folder.zip",
+    "sha256": "79764b3a08d33f9637873a0376f2f9ca32bf2eb7e167036d53e95eb11330d57b",
+    "imported_at": "2026-11-15T04:42:05.987106+00:00",
+    "file_count": 49,
+    "total_rows": 35564819,
+    "qc_rows": 32058448,
+    "backup_directory": "data\\import_backups\\20261115T044145Z"
+  },
+  "nasa_power": {
+    "source": "https://power.larc.nasa.gov (MERRA-2)",
+    "params": [
+      "GWETROOT",
+      "PRECTOTCORR",
+      "T2M",
+      "T2M_MAX",
+      "RH2M",
+      "WS2M"
+    ],
+    "last_date": "2026-11-14",
+    "updated_at": "2026-11-15T04:58:40+00:00"
+  },
+  "climate_modes": {
+    "oni": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+    "dmi": "https://psl.noaa.gov/gcos_wgsp/Timeseries/Data/dmi.had.long.data",
+    "updated_at": "2026-11-15T04:58:40+00:00"
+  }
+}

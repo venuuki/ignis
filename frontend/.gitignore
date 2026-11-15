@@ -1,0 +1,15 @@
+node_modules/
+.env
+work/
+__pycache__/
+*.pyc
+data/raw/
+data/parquet/
+data/live/
+data/alerts_outbox/
+*.tsbuildinfo
+
+playwright-report/
+test-results/
+.vscode/*.log
+dist/

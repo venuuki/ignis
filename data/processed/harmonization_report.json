@@ -1,0 +1,258 @@
+{
+  "method_version": "harm-v3.0-independent-test",
+  "unit": "VIIRS S-NPP-equivalent hotspots",
+  "countries": [
+    "Australia"
+  ],
+  "grid": {
+    "cell_deg": 0.1,
+    "region_deg": 0.5,
+    "driver_deg": 2.0
+  },
+  "cleaning": {
+    "keep_types": [
+      0
+    ],
+    "modis_min_confidence": 30,
+    "viirs_confidence": [
+      "n",
+      "h"
+    ]
+  },
+  "overlap_years": [
+    2012,
+    2025
+  ],
+  "training_years": [
+    2013,
+    2016,
+    2018,
+    2023
+  ],
+  "calibration_years": [
+    2017,
+    2022
+  ],
+  "holdout_years": [
+    2019,
+    2020,
+    2021
+  ],
+  "selected_model": "global_ratio",
+  "selected_model_terra_only": "gbm",
+  "selection_metrics": {
+    "stratified_eb": {
+      "cell_mae": 0.9153,
+      "cell_poisson_deviance": 1.504,
+      "region_month_mae": 10.613,
+      "region_month_r_log": 0.8726,
+      "country_month_mape_pct": 15.6,
+      "country_month_r_log": 0.9791,
+      "country_month_bias_pct": 5.17,
+      "country_year_abs_err_pct": 5.56
+    },
+    "gbm": {
+      "cell_mae": 0.9121,
+      "cell_poisson_deviance": 1.7285,
+      "region_month_mae": 11.835,
+      "region_month_r_log": 0.9362,
+      "country_month_mape_pct": 32.69,
+      "country_month_r_log": 0.9664,
+      "country_month_bias_pct": -34.4,
+      "country_year_abs_err_pct": 34.11
+    },
+    "global_ratio": {
+      "cell_mae": 0.7725,
+      "cell_poisson_deviance": 5.4976,
+      "region_month_mae": 9.288,
+      "region_month_r_log": 0.9305,
+      "country_month_mape_pct": 12.24,
+      "country_month_r_log": 0.9777,
+      "country_month_bias_pct": 0.42,
+      "country_year_abs_err_pct": 6.42
+    }
+  },
+  "selection_metrics_terra_only": {
+    "stratified_eb": {
+      "cell_mae": 1.3133,
+      "cell_poisson_deviance": 2.8169,
+      "region_month_mae": 16.291,
+      "region_month_r_log": 0.766,
+      "country_month_mape_pct": 23.65,
+      "country_month_r_log": 0.9671,
+      "country_month_bias_pct": 8.98,
+      "country_year_abs_err_pct": 10.39
+    },
+    "gbm": {
+      "cell_mae": 1.0606,
+      "cell_poisson_deviance": 2.2631,
+      "region_month_mae": 11.956,
+      "region_month_r_log": 0.8832,
+      "country_month_mape_pct": 20.46,
+      "country_month_r_log": 0.9753,
+      "country_month_bias_pct": -21.02,
+      "country_year_abs_err_pct": 21.02
+    }
+  },
+  "holdout_metrics": {
+    "stratified_eb": {
+      "cell_mae": 0.9082,
+      "cell_poisson_deviance": 1.3688,
+      "region_month_mae": 11.139,
+      "region_month_r_log": 0.8606,
+      "country_month_mape_pct": 12.38,
+      "country_month_r_log": 0.9879,
+      "country_month_bias_pct": 8.73,
+      "country_year_abs_err_pct": 8.8
+    },
+    "gbm": {
+      "cell_mae": 1.0069,
+      "cell_poisson_deviance": 2.1138,
+      "region_month_mae": 14.487,
+      "region_month_r_log": 0.9344,
+      "country_month_mape_pct": 36.18,
+      "country_month_r_log": 0.8983,
+      "country_month_bias_pct": -44.5,
+      "country_year_abs_err_pct": 41.43
+    },
+    "global_ratio": {
+      "cell_mae": 0.6837,
+      "cell_poisson_deviance": 4.6826,
+      "region_month_mae": 8.322,
+      "region_month_r_log": 0.9274,
+      "country_month_mape_pct": 11.65,
+      "country_month_r_log": 0.9862,
+      "country_month_bias_pct": -4.37,
+      "country_year_abs_err_pct": 5.58
+    },
+    "naive_modis": {
+      "cell_mae": 1.1236,
+      "cell_poisson_deviance": 6.5587,
+      "region_month_mae": 21.431,
+      "region_month_r_log": 0.9233,
+      "country_month_mape_pct": 79.27,
+      "country_month_r_log": 0.9887,
+      "country_month_bias_pct": -79.43,
+      "country_year_abs_err_pct": 79.33
+    }
+  },
+  "holdout_metrics_terra_only": {
+    "stratified_eb": {
+      "cell_mae": 1.2979,
+      "cell_poisson_deviance": 2.5741,
+      "region_month_mae": 16.872,
+      "region_month_r_log": 0.7496,
+      "country_month_mape_pct": 24.19,
+      "country_month_r_log": 0.9743,
+      "country_month_bias_pct": 10.37,
+      "country_year_abs_err_pct": 12.05
+    },
+    "gbm": {
+      "cell_mae": 1.1119,
+      "cell_poisson_deviance": 2.2516,
+      "region_month_mae": 14.017,
+      "region_month_r_log": 0.8798,
+      "country_month_mape_pct": 26.26,
+      "country_month_r_log": 0.9571,
+      "country_month_bias_pct": -30.35,
+      "country_year_abs_err_pct": 28.91
+    }
+  },
+  "variance_model": {
+    "full": {
+      "phi": 3.2606,
+      "alpha": 0.20801,
+      "kappa_region": 1.366,
+      "kappa_country": 7.447
+    },
+    "terra_only": {
+      "phi": 49.4926,
+      "alpha": 0.20894,
+      "kappa_region": 1.0,
+      "kappa_country": 9.249
+    }
+  },
+  "test_interval_coverage": {
+    "region": {
+      "n": 107820,
+      "coverage_80": 0.8599332220367278
+    },
+    "country": {
+      "n": 36,
+      "coverage_80": 0.7222222222222222
+    }
+  },
+  "gbm_feature_importance": {},
+  "features": [
+    "terra_d",
+    "terra_n",
+    "aqua_d",
+    "aqua_n",
+    "modis_frp",
+    "modis_frp_max",
+    "reg_terra",
+    "reg_aqua",
+    "ctry_terra_pc",
+    "ctry_aqua_pc",
+    "clim_cell",
+    "clim_cell_moy",
+    "moy_sin",
+    "moy_cos",
+    "lat",
+    "lon",
+    "ctry_code"
+  ],
+  "terra_features": [
+    "terra_d",
+    "terra_n",
+    "terra_frp",
+    "terra_frp_max",
+    "reg_terra",
+    "ctry_terra_pc",
+    "clim_cell_terra",
+    "clim_cell_moy_terra",
+    "moy_sin",
+    "moy_cos",
+    "lat",
+    "lon",
+    "ctry_code"
+  ],
+  "noaa20_to_snpp_ratio": {
+    "d": {
+      "global": 1.0169527193472467,
+      "Australia": 1.0169527193472467
+    },
+    "n": {
+      "global": 0.9893459591211029,
+      "Australia": 0.9893459591211028
+    }
+  },
+  "step_change_tests": {
+    "Australia": {
+      "naive": {
+        "change_point": "2011-12",
+        "K": 6902.0,
+        "p_value": 0.0,
+        "jump_at_2012_factor": 5.24
+      },
+      "harm": {
+        "change_point": "2011-02",
+        "K": 2520.0,
+        "p_value": 0.00068,
+        "jump_at_2012_factor": 1.19
+      }
+    }
+  },
+  "rows_stored": 2131904,
+  "data_last_date": "2026-11-14",
+  "evaluation_protocol": "Training-only climatology and platform scaling; calibration years choose the model and fit residual intervals; disjoint final test years assess performance. Production model refitted after frozen test predictions.",
+  "reference_policy": "Measured S-NPP where available, scaled NOAA platforms for reference gaps, calibrated MODIS where no VIIRS reference is available. Overlap sensors are never added or averaged.",
+  "uncertainty_scope": "Residual calibration uncertainty for MODIS estimates only; satellite measurement/omission uncertainty is unknown. No zero-width confidence interval is assigned to measured or scaled reference values.",
+  "coverage_scope": "Temporal span of supplied partitions, not cloud-free viewing exposure. A zero is no recorded quality-filtered detections, not evidence of no fire.",
+  "limitations": [
+    "Sensor-reference agreement is not independent ground truth.",
+    "Observation opportunities, clouds and missed fires are not recovered from hotspot-only files.",
+    "Retrospective transfer to 2000\u20132011 and orbit drift remain sources of uncertainty."
+  ],
+  "built_at": "2026-11-15T06:15:59.878532+00:00"
+}
