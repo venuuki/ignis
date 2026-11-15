@@ -1,4 +1,4 @@
-# Embercal ? Australia burning activity calendar
+# EmberCal ? Australia burning activity calendar
 
 Embercal is an Australia-focused NASA Space Apps research prototype. It puts MODIS history and VIIRS continuity on a common reference scale, with explicit data sources and independent model testing. The existing Revamp visual design, OpenStreetMap, Natural Earth fallback are retained.
 
